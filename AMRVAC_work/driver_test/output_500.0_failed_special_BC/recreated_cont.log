@@ -1,3 +1,0 @@
-inlet
-it   t   dt    rho m1 m2 m3 e b1 b2 b3 tr c1 c2 c3 n1 n2 n3| Xload Xmemory 'Cell_Updates /second/core' 'Active_Blocks/Core' 'Wct Per Code Time [s]' 'TimeToFinish [hrs]'
-      0  0.0000E+00  1.6286E-07  3.9085E+06  0.0000E+00  0.0000E+00  0.0000E+00  1.2530E+03  0.0000E+00  5.0061E+01  0.0000E+00  0.0000E+00  7.2000E-01  1.8000E-01  1.0000E-01      36      36      80 |   1.00E+00  1.00E+00  0.00E+00  1.90E+01  7.09E+14  9.84E+12

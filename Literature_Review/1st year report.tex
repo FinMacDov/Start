@@ -1,0 +1,678 @@
+% -------------------------------------------------------------------
+\RequirePackage{fix-cm}
+\documentclass[12pt,a4paper,twoside]{article}
+
+\usepackage{graphicx,xcolor,textpos}
+\usepackage{helvet}
+\usepackage{amsmath}
+\usepackage{rotating}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pdflscape}
+\usepackage[section]{placeins}
+\usepackage{afterpage}
+\usepackage{capt-of}% or use the larger `caption` package
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{aas_macros}
+\usepackage{natbib}
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+\newcommand{\Alfven}{Alfv\'{e}n } 
+\newcommand{\Alfvenic}{Alfv\'{e}nic }
+
+% ------------------------ Page settings -----------------------------
+% If you change these, the cover layout will also change.  In that
+% case you have to adjust the latter manually.
+% --------------------------------------------------------------------
+
+\topmargin -10mm
+\textwidth 160truemm
+\textheight 240truemm
+\oddsidemargin 0mm
+\evensidemargin 0mm
+
+\begin{document}
+\begin{titlepage}
+	\centering
+	\includegraphics[width=0.5\textwidth]{logo_uni2.jpg}\par\vspace{1cm}
+	{\scshape\LARGE The University of Sheffield \par}
+	\vspace{1cm}
+	{\scshape\Large First year Report\par}
+	\vspace{1.5cm}
+	{\Large\bfseries Numerical MHD Investigation of the Microphysics in the Solar Atmosphere\par}
+	\vspace{2cm}
+	{\Large\itshape Fionnlagh Mackenzie Dover\par}
+	\vfill
+	\large supervised by\par
+	\Large Prof.~ R\'{o}bert Erd\'{e}lyi
+
+	\vfill
+
+% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+\setcounter{page}{0}
+\section*{List of Symbols}
+Below is a list of the notation used throughout the text unless stated otherwise: \\ \\
+$\rho$ $\rightarrow$ Density.  \\
+$p$ $\rightarrow$ Pressure. \\
+$\boldsymbol{v} = (v_x, v_y, v_z)$ $\rightarrow$ Velocity.  \\
+$\boldsymbol{B} = (B_x,B_y,B_z)$ $\rightarrow$ Magnetic field strength. \\
+$\mu_0$ $\rightarrow$ Magnetic permeability. \\
+$\boldsymbol{g} = (0,0,-g_z)$ $\rightarrow$ Gravitational acceleration. \\
+$\gamma = 5/3$ $\rightarrow$ Ratio of specific heat. \\
+$\eta$ $\rightarrow$ Magnetic diffusivity of the plasma. \\
+$\widetilde{\mu}$ $\rightarrow$ Mean atomic weight (the average mass per particle in the units of the proton mass).  \\
+$R$ $\rightarrow$ Gas constant.\\
+$\boldsymbol{j} = (1 / \mu_0) (\nabla \times \boldsymbol{B})$ $\rightarrow$ Current density.  \\
+$H(z) = \dfrac{R T(z)}{\widetilde{\mu} g}$ $\rightarrow$ Scale height.  \\
+$G$ $\rightarrow$ Gravitational constant. \\
+$M_{\odot}$ $\rightarrow$ Solar mass. \\
+$R_{\odot}$ $\rightarrow$ Solar radius. \\
+$p_{mag} = \dfrac{B^2}{2 \mu_0} $ $\rightarrow$ Magnetic pressure. \\
+$P=p_{tot} = p + p_{mag} $ $\rightarrow$ Total pressure. \\
+$m = \rho \boldsymbol{v}$ $\rightarrow$ Momentum density. \\
+$e$ $\rightarrow$ Total energy density. \\ 
+$\boldsymbol{\xi}$ $\rightarrow$ Plasma displacement. \\
+$C^2_s = \gamma \dfrac{p}{\rho}$ $\rightarrow$ Sound speed squared. \\ 
+$V_A^2=\dfrac{B^2}{\mu_0 \rho}$ $\rightarrow$ \Alfven speed squared. 
+\clearpage
+\setcounter{page}{1}
+\section{General Information}
+Student: Fionnlagh Mackenzie Dover \\
+Registration number: 160136676 \\
+Supervisor: Professor R\'{o}bert Erd\'{e}lyi \\
+Advisor: Dr. Yi Li \\
+Registered: 2nd of October 2016
+\section{Introduction and Motivation}
+The Sun can be seen as a rather mundane star when compared to the zoo of astrophysical objects. However, this is far from the case as the Sun is our closest star and therefore best observable Sun. It is a host to fantastic images with high spatial resolution from instruments such as Solar Dynamic Observatory (SDO), Solar and Heliospheric Observatory (SOHO), Transition Region and Coronal Explorer (TRACE) which allow us to study its dynamics in great detail. My research for my PhD is to construct models using numerical magnetohydronamics (MHD) to investigate these dynamics that occur in the solar atmosphere. MHD is combination of the Navier$–$Stokes equation of fluid dynamics and Maxwell equations of electromagnetism. It describes the motion of magnetic field in the presence of electromagnetic fields, which is well suited for describing the dynamics of plasma in the solar atmosphere. One of main problems that have puzzled scientist for over 70 years is the coronal heating problem. This problem refers to observations that the temperature from the core of the Sun to the photosphere decreases as one would expect and the corona which is the outer layer of the Sun's atmosphere (i.e. furthest away from the nuclear reaction in the core) then logically this would be the coldest, however, the corona is 200 times hotter than the photosphere. This contradiction is referred to as the coronal heating problem. One candidate to explain coronal heating is based on magnetically driven waves. We know that these waves carry significant amount of energy, enough to heat and maintain the corona. However, these waves are not easily dissipated into heat energy. The challenge is to find mechanisms in which the energy in these waves are converted into heat energy.  \\ \\
+The motivation for my work is to construct a model that accurately simulates waves in the Transition region. We are interested in spicules (solar jets) as these jets are ubiquitous ($100,000$  at  any  time \citep{Beckers1968}) on the Sun, thus are a good candidate for coronal heating. These jets could perturb the transition region (a thin region of approximately $100$ km between the chromosphere and corona where the temperature raises from $10^4$ K to $1$-$2$ MK) causing it to oscillate (akin to when a drum is struck). When a solar jet rises up from the photosphere to corona it will cause the Transition region to ripple and thus perturb the surrounding magnetic fields. The goal is to analyse the waves and the energy involved in these waves to investigate if they could significantly contribute to coronal heating. 
+%The Sun's atmosphere is structured on the large scale into physically characteristic layers; from the dense "cool" visible surface of the Sun coined the photosphere, going through the chromosphere and the region to the spare, hot corona. The connectivity between these layers is provided by the magnetic field.
+\section{Academice Report}
+I started my PhD with directed reading through ``Magentohydrodyanmics of the Sun" by Eric Priest and ``Principles of Magnetohydrodynamics" by Hans Geodbloed and Stefaan Poedts, which gives a detailed introductory overview of the MHD equations and their application. The next step was learning the MPI-AMRVAC (Adaptive Mesh Refinement Versatile Advection Code) by using the manual available online. To proceeded, I ran the available test cases to build up the basic knowledge needed for numerical MHD simulations. By studying the test cases I began to build the framework of my code for the jet simulations which is described in more detail in the upcoming section.            
+\section{MPI-AMRVAC}
+MPI-AMRVAC is an MPI-parallelized Adaptive Mesh Refinement code. AMRVAC solves a systems of hyperbolic partial differential equations by a number of different numerical schemes. In principle the ARMVAC handles anything of the generic form: 
+\begin{equation}
+\frac{\partial \boldsymbol{U}}{\partial t} + \nabla \cdot \boldsymbol{F}(\boldsymbol{U}) = \boldsymbol{S}_{phys} (\boldsymbol{U}, \partial_{i} \boldsymbol{U}, \partial_i \partial_j \boldsymbol{U},\boldsymbol{x},t) .
+\end{equation}
+%solves the MHD equations in the following form:
+%\begin{equation}
+%\frac{\partial \rho}{\partial t} + \nabla \cdot (\boldsymbol{v} \rho) = 0 ,
+%\end{equation}
+%\begin{equation}
+%\frac{\partial \rho \boldsymbol{v}}{\partial t} + \nabla \cdot (\boldsymbol{v} \rho \boldsymbol{v} - \boldsymbol{BB})+ \nabla p_{tot} = 0 ,
+%\end{equation}
+%\begin{equation}
+%\frac{\partial e}{\partial t} + \nabla \cdot (\boldsymbol{v}e - \boldsymbol{BB} \cdot + \boldsymbol{v} p_tot) = \nabla \cdot (\boldsymbol{B} \times \eta \boldsymbol{j}) ,
+%\end{equation}
+%\begin{equation}
+%\frac{\partial \boldsymbol{B}}{\partial t}+ \nabla \cdot (\boldsymbol{Bv}-\boldsymbol{Bv}) = -\nabla \times (\eta \boldsymbol{j}) ,
+%\end{equation}
+%\begin{equation}
+%p=(\gamma-1)(e- \frac{\rho \boldsymbol{v}^2-\boldsymbol{B}^2}{2}) .
+%\end{equation}
+The main focus of this software is on conservation laws in particular with shock dominated problems. AMRVAC has been constructed so it is a single versatile software with options and switches for various problems (e.g. HD, MHD, adiabatic, relativistic, choices in numerical solvers, ect) rather than developing a different method or version for each problem separately. The advantage of this approach is that it allows for a reduction of overall time for software development. One of the main reasons for using AMRVAC for carrying out numerical simulations of these jets is to deal with differences in the order of magnitude in length scales involved in this research. This has been my main task over the last 9 months becoming acquainted with AMRVAC software. As part of this I have become comfortable with using ICEBERG and ParaView (open-source software that is used visualise the output).
+\subsection{Highlights of Simulations}
+The set up for this HD simulation for an ideal gas without gravity in a 2D box with random values for the density throughout the domain. This is similar to conditions observed on the solar surface or through the convection zone of the Sun. We then set off a pulse due to a pressure perturbation in the centre of the computational domain. The boundary conditions are open as to allow material to flow out. We then study how the the wave propagates through an inhomogeneous background density. The resolution for this simulation was 400$\times$400 with one level of AMR. See Fig. \eqref{rd} for results. One interesting features we see from Fig. \eqref{rd} is as the wave propagates we start to see Kelvin-Helmholtz instabilities form in the wake of the wave due velocity shearing.
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.75\textwidth]{figs/sims/randomdensity/rd_merg.png}
+ \caption{Snapshots of random density simulation. On the left of each figure is the density and the right is the pressure values. Each figure is a different snapshot in time, from left to right corresponds to an increase in time.}
+ \label{rd}
+\end{figure} \\ \\
+Next we investigate a jet interacting with a slab of stratified density (decays exponentially). This is a simple simulation to observes what happens when a jet collides with a region of higher density. I ran a 2D HD simulation, treating the fluid as an ideal gas and not being acted on by gravity. We take Mach 12 jet flow as it passes through a lighter external medium and collides on a wall of density stratification. I ran numerous variations of this jet code changing properties such as speed, angle, different density contrast between the jet and ambient medium, ect. The boundary conditions (BC) on the left is custom BC to continuously drive the jet at the previously mentioned velocity and the rest are open. I have created 3D version of this code but, I have chosen to display the results for 2D simulation as shown in Fig. \eqref{jslab}. As jet moves through the medium we see Kelvin-Helmholtz roll ups occurring on each side of jet. Once the jet comes into contact with the wall of denser material the slab begins until the punctures through. Through out this process more Kelvin-Helmholtz instabilities form and the jet starts to form a kinking motion in the last snap shot. \\    
+\begin{figure}[!]
+ \centering
+ \includegraphics[width=0.75\textwidth]{figs/sims/jetcloudinteraction/jetslab_merg.png}
+ \caption{Snapshots of jets interaction with a slab. The colour plots corresponds to density (jet is 3 time denser than the surrounding medium) and blue colour scale is tracer set to follow the evolution of the jet. Each figure is a different snapshot in time, with time increasing from left to right.}
+ \label{jslab}
+\end{figure} \\
+The next simulation of interest is a 3D MHD code for simulating Rayleigh-Taylor instabilities forming in solar prominences. A solar prominence is a large, bright feature that extrudes outwards from photosphere. Prominences are anchored to the Sun's surface, and extend outwards into the corona. This code is a test case provided showing how to implement a stratified atmosphere in magnetostatic equilibrium. It displays how to use the gravity modules built into the AMRVAC. Random velocity perturbations are added along the lower boundary of prominence disturbing the force balance holding the plasma causing gravity to win and hence for the material to fall down to the photosphere in the form of a Rayleigh–Taylor instability. The resoultion for this simulation is 150$\times$150 with three levels of AMR. The results of the simulations is displayed in Fig. \eqref{promRT}.
+\begin{figure}[!]
+ \centering
+ \includegraphics[width=0.6\textwidth]{figs/sims/promRT/mergePromRT.png}
+ \caption{Snapshots of solar prominence simulation.   The colour plot corresponds to density. Each figure is a different snapshot in time, with time increasing from left to right.}
+  \label{promRT}
+\end{figure}  \\ \\
+More recently, the codes I have created simulate HD and MHD jets with gravity acting against them. The jets are set up similar as the earlier jet simulation (denser jet ambient medium and boundary conditions). The set up of this simulation is simplistic as it ambient density around the jet is not in hydrostatic equilibrium, therefore as the time increase there is an increasing velocity acting against the jet. However, the jets are travelling at super sonic speed making previous mention problem minimal. This set up was mainly to see the results that can be obtain with higher levels of ARM (in this case 4) and to test the gravity module. Snapshots of this simulation can be seen in Fig. \eqref{HD_g_jet}. In these snapshots we can observe a combination of both Kelvin-Helmholtz and Rayleigh-Taylor as the jet evolves.      
+\begin{figure}[h]
+ \centering
+  \includegraphics[width=0.8\textwidth]{figs/sims/hd_g_jet/hd_g_jet.png}
+  \caption{HD jet with gravity acting in the direction opposite to the jet flow. The background density is $1/3$ of the jet. The Snapshot increase in time from left to right.}
+  \label{HD_g_jet}
+\end{figure} \\ 
+\subsection{HD and MHD Jets in Stratified Atmosphere}
+The Sun's atmosphere is challenging to simulate as it is gravitationally stratified and the Sun's magnetic field is a host to many complex structures in multiple directions. For my MHD simulations I have used the temperature and density profiles (see Fig. \ref{fig:test}) from the VAL IIIC \citep{Vernazza1981} and \cite{McWhirter1975} atmospheric models for the solar atmosphere from $0$ to $10$ Mm (were 0 refers to surface of the Sun). The next step is to achieve magnetohydrostatic equilibrium. Thus, we start with the ideal MHD equations: 
+\begin{equation}\label{eq1}
+\frac{\partial \rho}{\partial t} = - \nabla \cdot (\rho \boldsymbol{v} ) ,
+\end{equation}
+\begin{equation}\label{eq2}
+\rho \frac{\partial \boldsymbol{v}}{\partial t} = -\nabla p + \boldsymbol{j} \times \boldsymbol{B} + \rho \boldsymbol{g} ,
+\end{equation}
+\begin{equation}\label{eq3}
+\frac{d p}{d t} = - \gamma p \nabla \cdot \boldsymbol{v} ,
+\end{equation}
+\begin{equation}\label{eq4}
+\frac{\partial \boldsymbol{B}}{\partial t} = \nabla \times (\boldsymbol{v} \times \boldsymbol{B}) - \frac{1}{\mu_0} \nabla \times ( \eta \nabla \times \boldsymbol{B} ) ,
+\end{equation}
+\begin{equation}\label{eq5}
+\nabla \cdot \boldsymbol{B} = 0 .
+\end{equation}
+We assume an ideal gas therefore pressure is given by:
+\begin{equation}\label{igl}
+p = \frac{\rho R T}{\widetilde{\mu}}.
+\end{equation}
+For magnetohydrostatic equilibrium we must have force balance ($\boldsymbol{v}=0$) therefore eq. \eqref{eq2} becomes: 
+\begin{equation}\label{eq6}
+0 = - \nabla p + \boldsymbol{j} \times \boldsymbol{B} + \rho \boldsymbol{g} .
+\end{equation} 
+For the simulations we have taken simplest magnetic field configuration by considering only a purely vertical uniform magnetic field ($\boldsymbol{B} = (0,0,B_z)$) which does not exert any force as:
+\begin{equation}
+\boldsymbol{j} = \frac{1}{\mu_0} (\nabla \times (0,0,B_z)) = 0, 
+\end{equation}
+hence we recover the same results as for hydrostatic equilibrium for Eq. \eqref{eq2}:
+\begin{equation} \label{eq7}
+\nabla p = - \rho g \boldsymbol{\hat{z}} .
+\end{equation}
+As we only have variation in the $z$-components and using the ideal gas law given by Eq. \eqref{igl}, Eq. \eqref{eq7} simplifies further to:
+\begin{equation} \label{ODE} 
+\frac{d p}{dz} = -\frac{g \widetilde{\mu}}{R T(z)} p(z) = -\frac{p(z)}{H(z)} 
+\end{equation} 
+Eq. \eqref{ODE} is a separable, first order ordinary differential equation, such that:
+\begin{equation}
+\frac{d p }{p} = -\frac{1}{H(z)} dz,
+\end{equation}
+and integrating gives:
+\begin{equation}\label{eq13}
+\log (p) = -n(z) + \log (p(0)),
+\end{equation}
+where:
+\begin{equation}
+n(z) = \int^{z}_{0} \frac{1}{H(z)},
+\end{equation}
+is the ``integrated number" of scale heights between the arbitrary level at which the pressure is $p(0)$ and the height $z$. Thus Eq. \eqref{eq13} becomes:
+\begin{equation}\label{SHP}
+p(z) = p(0) e^{-n(z)}.
+\end{equation}
+As the temperature is not isothermal Eq. \eqref{SHP} is in its simplest. This equation needs to be implement to obtain the pressure vales values from the temperature and density profiles. These profiles are shown in Fig. \eqref{fig:test} and are used in the following simulation. Next we take the same set up as previous jet simulations except the jet now travels through a stratified medium which is displayed in Fig. \eqref{MHD_jet_g}. The jets initial speed is set $20$ $km$ $s^{-1}$ which is typical speed for a spicule. So far the jet only reaches $1$ Mm because as the wave travels further up in the atmosphere it increases in speed with decreasing density and travels too fast for the time integration. In this simulation there is low plasma-$\beta$ (thus magnetic forces dominant of the pressure force). One interesting feature in Fig. \eqref{MHD_jet_g} is that we no longer see the Kelvin-Helmholtz, this is due to presence of the vertical magnetic field as it provides stability. \\
+\begin{figure}[!]
+ \centering
+ \includegraphics[width=\textwidth]{figs/sims/mhd_g_jet/mhd_g_jet.png}
+ \caption{Snapshots of solar prominence simulation. The colour plot corresponds to density. Each figure is a different snapshot in time, with time increasing from left to right.}
+  \label{MHD_jet_g}
+\end{figure}  \\ \\
+%!!!!!!!!!!!!!!!!!!!!!!!111
+%NEED TO REDO THESE PLOTS THE NUMBER ARENT REABLE
+\begin{figure}[!]
+  \centering
+  \begin{subfigure}{0.75\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{figs/rho_profile.png}
+    \caption{Density Profile.}
+    \label{rho}
+   \end{subfigure}
+  \begin{subfigure}{0.75\textwidth}
+    \centering
+    \includegraphics[width=0.75\textwidth]{figs/te.png}
+    \caption{Temperature profile.}
+    \label{Te}
+   \end{subfigure}
+\caption{Profiles taken from the VAL IIIC \citep{Vernazza1981} and \cite{McWhirter1975}  atmospheric models. The red lines are the raw data from atmospheric model and the dashed magenta line profiles are the modified to give force balance. The modified profiles are used in the simulations.}
+ \label{fig:test}
+\end{figure} \\
+\subsection{LFFF and PFSS}
+Using the code available in the AMRVAC its possible to generate a LFFF (Linear Force-Free Filed) extrapolation from a HMI (Helioseismic and Magnetic Imager ) magnetogram collected on the 28/03/2014. A force free plasma refers to the magnetic field  present when plasma pressure is small compared to the magnetic pressure such that the plasma pressure maybe ignored, thus only the magnetic pressure is considered. For a full derivation of the of the mathematics involved in obtaining the field line from LFFF is given by \cite{Wiegelmann2012}. The results of this method are shown in Fig. \eqref{LFFF}.   
+\\
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.60\textwidth]{figs/sims/LFFF/test_pol_2.png}
+ \caption{Plot of LFFF extrapolation of data collected from 28/03/2014.}
+ \label{LFFF}
+\end{figure} \\
+PFSS (Potential Field Source Surface) is similar to above case, but this time generating a global magnetogram from HMI synoptic map from Carriton Rotation C R2111. The detail of the mathematics involved in the PFFS simulation is given by \cite{Porth2014}. The results of the 3D extrapolation are displayed in Fig. \eqref{PFSS}. \\
+%We are determining the density stratification on a much larger scale than in the jet simulation, therefore we are required to take into account the effects of spherical geometry and the change of the gravitational acceleration with respect to height:
+%\begin{equation}
+%g(r) = \frac{G M_{\odot}}{r^2}, 
+%\end{equation} 
+%where $r$ is the radial coordinate. The magnetic field is taken to be strictly radial:
+%\begin{equation}
+%B = \frac{B_0 R_{\odot}^2}{r^2} .
+%\end{equation} 
+%The set up we have taken is its a spherically symmetric isothermal atmosphere. There is no Lorentz force (i.e. $j=0$). Therefore, the magnetostatic equation is similar to Eq. \eqref{eq7}:
+%\begin{equation}\label{strat_c}
+%\frac{d p(r)}{d r} = - \rho(r) g(r) ,
+%\end{equation}  
+%Our equation of state is still the ideal gas law, which can be used to rewrite Eq. \eqref{strat_c}:
+%\begin{equation} \label{ODE_2}
+%\frac{d \rho(r)}{d r} = \frac{R^2_{\odot}}{r^2} \frac{1}{H} \rho (r)
+%\end{equation}
+%Here, the scale height ($H$) was defined by substituting the value for gravitational acceleration ($g(R_{\odot})=GM/R_{\odot^2}$) at the solar surface into $H$ in the List of Symbols. Eq. \eqref{ODE_2} solution is found with the following steps, first by separating:
+%\begin{equation}
+%\int \frac{d \rho}{\rho} = - \int \frac{R_{\odot}^2}{H r^2} dr,
+%\end{equation}
+%with the solution:
+%\begin{equation}
+%\rho (r) = \rho (0)\exp \left( \frac{R_{\odot}}{H} \left( \dfrac{R_{\odot}}{r} - 1 \right) \right).
+%\end{equation}
+%This solution concurs well with observationally determined empirical dependence as shown by the profile of plasma concentration in polar coronal holes determined with SPARTAN 201-01 \citep{Fisher_1995}.
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=0.75\textwidth]{figs/sims/PFFS/PFFS.png}
+ \caption{Plot of the PFSS of HMI synoptic map Carrington Rotation C R2111.}
+ \label{PFSS}
+\end{figure}
+\section{Forward Modelling of Transverse Waves in non-uniform Flux Tube}
+Secondary to the AMRVAC simulation I am working on forward modelling standing kink mode in coronal loop with the inclusion a transition region in the density profile between the coronal loop and the external ambient plasma. This allows for resonance between the kink wave and the \Alfven wave which is a possible mechanism in which the wave energy can be converted into heat energy. By forward modelling this converts the plasma parameters into observables and thus possibly identify the observational features of coronal heating. Resonant absorption is a theoretically sound mechanism for dampening kink oscillations but it lacks the observational evidence \citep{Antolin_2015a}. This work is a step towards obtaining the plasma parameters which can be used make synthetic observations and identify observational features of resonant absorption.   
+\subsection{Solutions For Region with Homogeneous Density}
+The analysis begins with the linearised ideal MHD equations with no effect of gravity. We define the Lagrangian displacement as $\boldsymbol{v} = \frac{\partial \boldsymbol{\xi}}{\partial t}$. These equations were re-derived from \cite{Ruderman2009} and are summarised below:
+\begin{equation} \label{q1}
+\rho_1 = - \boldsymbol{\nabla} \cdot ( \rho_0 \boldsymbol{ \xi }  ) ,
+\end{equation}
+\begin{equation} \label{q2}
+\rho_0 \frac{ \partial^2 \boldsymbol{\xi} }{\partial t^2} = - \boldsymbol{\nabla} P + \frac{1}{\mu_0} \left( \boldsymbol{B_0} \cdot \boldsymbol{\nabla} \right) \boldsymbol{B_1} + \frac{1}{\mu_0} \left( \boldsymbol{B_1} \cdot \boldsymbol{\nabla} \right) \boldsymbol{B_0} , 
+\end{equation}
+\begin{equation} \label{q3}
+\boldsymbol{B_1} = \boldsymbol{\nabla} \times ( \boldsymbol{\xi} \times \boldsymbol{B_0} ) ,
+\end{equation}
+\begin{equation} \label{q4}
+p_1 - C^2_s \rho_1 = \boldsymbol{\xi} \cdot (C^2_s \boldsymbol{\nabla} \rho_0 - \boldsymbol{\nabla} p_0) ,
+\end{equation} 
+where:
+\begin{equation}\label{eq94}
+P = p_1 + \frac{\boldsymbol{B_0} \cdot \boldsymbol{B_1}}{ \mu_0} .
+\end{equation}
+The subscript $0$ ($1$) corresponds to the background (perturbed) quantities. The background state is assumed to be static. This implies that the background velocity is zero and all background quantities are independent of time. Applying the equilibrium conditions, the following is obtained:
+\begin{equation} \label{q5}
+\boldsymbol{ \nabla} p_0 = \boldsymbol{j_0} \times \boldsymbol{B_0} ,
+\end{equation} 
+\begin{equation} \label{q6}
+p_0 = \rho_0 R T_0 ,
+\end{equation}
+\begin{equation} \label{q7}
+\boldsymbol{\nabla} \cdot \boldsymbol{B_0} = 0 ,
+\end{equation}
+\begin{equation} \label{q8}
+\boldsymbol{j_0} = \frac{1}{ \mu_0 } \boldsymbol{\nabla} \times \boldsymbol{B_0} .
+\end{equation}
+Using Eq. (\ref{q5}) an expression can be derived for the tension force and the magnetic pressure:
+\begin{equation}
+\boldsymbol{ \nabla} p_0 = \frac{1}{ \mu_0 } \left(  \boldsymbol{\nabla} \times \boldsymbol{B_0} \right) \times \boldsymbol{B_0} = \frac{-1}{ 2 \mu_0 }   \boldsymbol{\nabla} \left(  \boldsymbol{B_0} \cdot \boldsymbol{B_0} \right)+ (\boldsymbol{B_0} \cdot \boldsymbol{\nabla}) \frac{\boldsymbol{B_0}}{\mu_0} ,
+\end{equation} 
+and this can be rewritten to:
+\begin{equation} \label{q9}
+\boldsymbol{ \nabla} \left( p_0 + \frac{B_0^2}{ 2 \mu_0 }  \right) =  (\boldsymbol{B_0} \cdot \boldsymbol{\nabla}) \frac{\boldsymbol{B_0}}{\mu_0}
+\end{equation} 
+On the RHS (LHS) of Eq. (\ref{q9}) is the magnetic pressure (tension force). In the case of straight magnetic field lines, the equilibrium total pressure is constant which gives:
+\begin{equation} \label{q10}
+p_{T0} \equiv p_0 +  \frac{B_0^2}{ 2 \mu_0 } = \mbox{constant} . 
+\end{equation}   
+\begin{figure}
+\centering
+\includegraphics[width=0.35\textwidth]{figs/plasma.PNG}
+\caption{The background state of an infinite magnetic tube \citep{Ruderman2009}}
+\label{fig_3}
+\end{figure} \\
+For modelling the oscillations in a coronal loop an infinite cylinder is taken as shown in Fig. \ref{fig_3}. The magnetic field is parallel to the cylinder central axis. All the background quantities are constant inside and outside the infinite cylinder with radius $R$. In general the radial profile of the background quantities  behaves as a step function across the boundary of the coronal loop. The subscript $i$ ($e$) denotes the background quantities inside (outside) the cylinder. The total background pressure has to be continuous at the coronal loop boundary. Thus, Eq. (\ref{q10}) can be expressed as:
+% include fig of the jump in the density profile
+\begin{equation}
+p_i +  \frac{B_i^2}{ 2 \mu_0 } = p_e +  \frac{B_e^2}{ 2 \mu_0 } .
+\end{equation}        
+In this analysis cylindrical co-ordinates are used $(r, \phi, z)$. The components of the displacement, $\boldsymbol{\xi} = (\xi_r,\xi_{\theta},\xi_z) $ and the magnetic field perturbation $\boldsymbol{B_1} = (B_{1r}, B_{1 \theta},B_{1z})$ are redefined. The configuration for this model is to consider a dense coronal loop surrounded by a less dense ambient plasma. This condition is needed in order to form a wave guide that traps the oscillation energy sufficiently long enough to be observed \citep{Van_Doorsselaere2008}. In this analysis only the trapped waves are considered and thus, leaky waves are neglected. This implies that perturbations have to decay as you move further away from the coronal loop (i.e. when $r \rightarrow \infty$). The density is taken as homogeneous internal and external to the loop. At the boundary of the cylinder the normal displacement component of the displacement and the perturbation of the total pressure have to be continuous, giving:
+\begin{equation}\label{n12}
+\xi_{r,i} = \xi_{r,e}, \ \ \ \ P_{0} = P_e .
+\end{equation}
+An expression for the compressibility is derived with the following steps. The equilibrium magnetic field is taken to be homogeneous along $z$ and only has a $z$-dependence, i.e. $\boldsymbol{B_0} = (0,0,B_0)$. By combining Eq. \eqref{q1} to \eqref{q8} one can match the expressions obtained in \cite{Ruderman2009}:
+\begin{equation} \label{q16}
+\frac{\partial^4 P}{\partial t^4} - (C^2_s + V^2_a ) \nabla^2 \frac{\partial^2 P}{\partial t^2} + C^2_s V^2_A \nabla ^2 \frac{\partial^2 P}{\partial z^2} = 0 ,
+\end{equation}
+\begin{equation}\label{q17}
+\frac{ \partial^2 \xi_r }{\partial t^2} - V^2_A  \frac{\partial^2 \xi_r}{\partial z^2}  = - \frac{1}{\rho_0} \frac{\partial P}{\partial r} ,
+\end{equation}
+\begin{equation}\label{q22}
+\frac{ \partial^2 \xi_{\phi} }{\partial t^2} - V^2_A  \frac{\partial^2 \xi_{\phi} }{\partial \phi^2}  = - \frac{1}{r\rho_0} \frac{\partial P}{\partial \phi }  ,
+\end{equation}
+\begin{equation}\label{q18}
+\frac{ \partial^2 \xi_{z} }{\partial t^2} - C^2_T  \frac{\partial^2 \xi_z }{\partial z^2}    = - \frac{C^2_T}{ \rho_0 V^2_A} \frac{\partial P}{\partial z } , 
+\end{equation}
+\begin{equation} \label{q19}
+B_{1r} = B_0 \frac{\partial \xi_r}{\partial z}, \ \ \ \ B_{1\phi} = B_0  \frac{\partial \xi_{\phi}}{\partial z}, \ \ \ \ B_{1z} = \frac{B_0}{r} \left( -\frac{\partial (r \xi_r)}{\partial r} - \frac{\partial \xi_{\phi} }{\partial \phi} \right) ,
+\end{equation}
+\begin{equation}\label{q20}
+- \frac{\rho_1}{\rho_0} = \frac{1}{r} \frac{\partial (r \xi_r)}{ \partial r} + \frac{1}{r} \frac{\partial \xi_{\phi}}{\partial \phi} + \frac{\partial \xi_z}{\partial z}  = \boldsymbol{\nabla} \cdot \boldsymbol{\xi},
+\end{equation}
+\begin{equation}\label{q21}
+p_1 = C^2_s \rho_1 .
+\end{equation}
+The next step is to Fourier analyse the perturbations of all quantities and obtain the solutions in the form of the eigenmodes. All perturbed quantities in Eq. (\ref{q16}) to Eq. (\ref{q21}) are taken to be proportional to $\exp (i(-\omega t+m \phi +kz))$, where $m$ is an integer. Eq. (\ref{q16}) to (\ref{q21}) can be reduced as follows, starting with Eq. (\ref{q16}): 
+\begin{equation}
+\frac{\partial^4 P}{\partial t^4} -(C^2_s + V^2_a )\underbrace{ \nabla^2 \frac{\partial^2 P}{\partial t^2}}_\text{\encircle{1}} +C^2_s V^2_A \underbrace{ \nabla ^2 \frac{\partial^2 P}{\partial z^2}}_\text{\encircle{2}}=0 ,
+\end{equation}
+\begin{equation}
+\encircle{1} \Rightarrow \left( \frac{1}{r} \frac{\partial}{\partial r} r \frac{\partial}{\partial r} + \frac{1}{r^2} \frac{\partial^2}{\partial \phi^2} + \frac{\partial^2}{\partial z^2} \right)(-\omega^2 P) ,
+\end{equation}
+\begin{equation}\label{n4}
+\Rightarrow \omega^2 \left[- \frac{\partial^2 P}{\partial r^2} - \frac{1}{r} \frac{\partial P}{\partial r} \right] + \omega^2 \left( \frac{m^2}{r^2}  + k^2  \right) P ,
+\end{equation}
+\begin{equation}
+\encircle{2} \Rightarrow \left( \frac{1}{r} \frac{\partial}{\partial r} r \frac{\partial}{\partial r} + \frac{1}{r^2} \frac{\partial^2}{\partial \phi^2} + \frac{\partial^2}{\partial z^2} \right)(-k^2 P) ,
+\end{equation}
+\begin{equation}\label{n5}
+\Rightarrow k^2 \left( - \frac{\partial^2 P}{\partial r^2} - \frac{1}{r} \frac{\partial P}{\partial r} \right) + k^2 \left( \frac{m^2}{r^2}  + k^2  \right) P .
+\end{equation}
+Applying Eq. (\ref{n4}) and  Eq. (\ref{n5}) to Eq. (\ref{q16}) shows: 
+\begin{align}
+\left[ \omega^2 (C^2_s + V^2_A) - k^2C^2_sV^2_A   \right] \left( \frac{d^2P}{dr^2} + \frac{1}{r} \frac{dP}{dr}  \right) \\ + \left[ \omega^4 + (- \omega^2 (C^2_s+ V^2_A)+k^2 C^2_s V^2_A ) \left( k^2 + \frac{m^2}{r^2} \right)   \right] P =0 ,
+\end{align}
+which by manipulating further gives the following expression: 
+\begin{align}\label{n6}
+ \frac{d^2P}{dr^2} + \frac{1}{r} \frac{dP}{dr}  + \left[  \frac{\omega^4 - \omega^2 k^2 (C^2_s+ V^2_A)+k^4 C^2_s V^2_A }{ k^2C^2_sV^2_A - \omega^2 (C^2_s + V^2_A)} - \frac{m^2}{r^2}  \right] P =0 .
+\end{align}
+Factorising the numerator of the 3rd term on the RHS of Eq. (\ref{n6}) and multiplying the 1st term in the dominator by $\dfrac{C_s^2+V^2_A}{C_s^2+V^2_A}$, displays the following:
+\begin{equation}\label{n7}
+ \frac{d^2P}{dr^2} + \frac{1}{r} \frac{dP}{dr}  + \left[  \frac{ (C^2_sk^2-\omega^2)(V^2_Ak^2-\omega^2) }{  k^2C^2_sV^2_A \left( \frac{C_s^2+V^2_A}{C_s^2+V^2_A}  \right) -\omega^2 (C^2_s + V^2_A)  } - \frac{m^2}{r^2}  \right] P =0 .
+\end{equation}
+Factorising the denominator in Eq. (\ref{n7}) gives the following:
+\begin{equation}\label{n8}
+ \frac{d^2P}{dr^2} + \frac{1}{r} \frac{dP}{dr}  + \left[ \kappa^2_r - \frac{m^2}{r^2}  \right] P =0 ,
+\end{equation}
+where we have defined $\kappa^2_r = \frac{ (C^2_sk^2-\omega^2)(V^2_Ak^2-\omega^2) }{(C_s^2+V^2_A) (C^2_T - \omega^2)  } $. Eq. (\ref{n8}) is in the form of a Bessel differential equation. Applying Fourier analysis Eq. (\ref{q17}) to (\ref{q18}) yields:
+\begin{equation}
+( \omega^2 - V^2_A k^2) \xi_r =  \frac{1}{\rho_0} \frac{dP}{dr} ,
+\end{equation}
+\begin{equation}
+( \omega^2-V^2_A k^2) \xi_{\phi} = \frac{imP}{r \rho_0} ,
+\end{equation}
+\begin{equation}
+(\omega^2 - C^2_T k^2) \xi_z = \frac{i C^2_T k}{\rho_0 V^2_A} P .
+\end{equation}
+and for Eq. (\ref{q19}) we obtain:
+\begin{equation}
+B_{1r} = B_0 i k \xi_r, \ \ \ \ B_{1 \phi} = B_0 i k \xi_{\phi}, \ \ \ \ B_{1z} = - \frac{B_0}{r} \left( \frac{d(r \xi_r)}{dr} + im \xi_{\phi} \right) .
+\end{equation}
+Using Fourier analysis on Eq. (\ref{q20}) yields:
+\begin{equation}
+ -\frac{\rho_1}{\rho_0} = \frac{1}{r} \frac{d(r \xi_r)}{dr}+ \frac{1}{r}im \xi_{\phi} + ik \xi_z .
+\end{equation}
+For convenience the results above are summarised below. These match the derivations shown in \cite{Ruderman2009}:
+\begin{equation}\label{q38}
+ \frac{d^2P}{dr^2} + \frac{1}{r} \frac{dP}{dr}  + \left[ \kappa^2_r - \frac{m^2}{r^2}  \right] P =0 ,
+\end{equation}
+\begin{equation}\label{q39}
+( \omega^2 - V^2_A k^2) \xi_r =  \frac{1}{\rho_0} \frac{dP}{dr} ,
+\end{equation}
+\begin{equation}\label{q40}
+( \omega^2-V^2_A k^2) \xi_{\phi} = \frac{imP}{r \rho_0} ,
+\end{equation}
+\begin{equation}\label{q41}
+(\omega^2 - C^2_T k^2) \xi_z = \frac{i C^2_T k}{\rho_0 V^2_A} P ,
+\end{equation}
+\begin{equation}\label{q42}
+B_{1r} = B_0 i k \xi_r, \ \ \ \ B_{1 \phi} = B_0 i k \xi_{\phi}, \ \ \ \ B_{1z} = - \frac{B_0}{r} \left( \frac{d(r \xi_r)}{dr} + im \xi_{\phi} \right) ,
+\end{equation}
+\begin{equation}\label{q43}
+ -\frac{\rho_1}{\rho_0} = \frac{1}{r} \frac{d(r \xi_r)}{dr}+ \frac{1}{r}im \xi_{\phi} + ik \xi_z .
+\end{equation}
+% Include bessel function fig: http://nl.mathworks.com/help/matlab/ref/besselj.html?refresh=true
+Eq. (\ref{q38}) is a 2nd order differential equation in the form of a Bessel differential equation. As alluded to earlier, Bessel functions are commonly encountered in cylindrical systems. As discussed in the introduction, the kink modes are given for $m=1$. We assume $\omega^2 \neq V_A$, and thus there is no trivial solution for equations (\ref{q38}) to (\ref{q43}) with $P=0$. We impose that there are no leaky waves (i.e. the waves are evanescent external to the coronal loop) the perturbations decaying as $r \rightarrow \infty$, therefore we neglect modified Bessel function $I_m$ as it tends to infinity for $r \rightarrow \infty$. The solution for the Bessel equation (\ref{q38}) when $r > R$ is given by the modified Bessel function $K_m$, thus:
+\begin{equation}\label{n9}
+P_e = A_e K_1 (\kappa_e r) ,
+\end{equation} 
+where $A_e$ is an integration constant and $K_1$ is a modified Bessel function of the first kind. Substituting Eq. (\ref{n9}) into Eq. (\ref{q39}) obtains the external radial displacement:
+\begin{equation}
+\xi_{r,e} = \frac{A_e \kappa_e}{\rho_e (\omega^2-\omega^2_{A,e})} K^{\prime}_1[\kappa_e r] ,
+\end{equation}
+in which the prime denotes derivative with respect to the argument and $\omega^2_{A,e} = V^2_{Ae} k^2$ is the external \Alfven frequency. For the internal solution we impose that the solution must be finite when $r=0$ (i.e. at the centre), therefore we neglect Bessel function $Y_m$ as its solution is not finite at $r=0$. The solution for the Bessel equation (\ref{q38}) when $r<R$ is given by the Bessel function $J_m$, thus:  
+\begin{equation}\label{n10}
+P_i = A_i J_1(\kappa_i r) ,
+\end{equation}  
+where $A_i$ is an integration constant and $J_1$ is the Bessel function of the first kind. Substituting Eq. (\ref{n10}) into Eq. (\ref{q39}) yields the internal radial displacement:
+\begin{equation}
+\xi_{r,i} = \frac{A_i \kappa_i}{\rho_i(\omega^2-\omega_{A,i}^2)}J^{\prime}_1\left[ \kappa_i r \right] , 
+\end{equation}   
+where $\omega^2_{A,i} = V^2_{Ai} k^2$ is the internal \Alfven frequency. The dispersion relation is obtained by imposing the continuity of the total perturbed pressure $P$ and the radial displacement $\xi_r$ at $r=R$, the boundary of the coronal loop. This boundary condition gives a set of two linearly homogeneous algebraic equations for $A_e$ and $A_0$. Using the boundary conditions given by Eq. (\ref{n12}), the following dispersion relation in matrix form is acquired: 
+\begin{equation} \label{n11}
+\def\arraystretch{2}
+\begin{bmatrix}
+    0 \\
+    0 
+  \end{bmatrix} =
+  \begin{bmatrix}
+    -J_1[ \kappa_i R] & K_1[\kappa_e R] \\
+    -\dfrac{\kappa_i J_{1}^{\prime}[\kappa_i R]}{\rho_i(\omega^2-\omega_{A,i})} & \dfrac{\kappa_e K_{1}^{\prime}[\kappa_e R]}{\rho_e(\omega^2-\omega_{A,e})}  
+  \end{bmatrix}
+   \begin{bmatrix}
+  A_i \\
+  A_e 
+  \end{bmatrix} .
+\end{equation}
+This dispersion relation has non-trivial solutions only when its determinant is zero. It was solved numerically in \cite{Yuan_2016}. The analysis in this section is valid for a homogeneous density only. The density profile used in this section can be improved upon. To better reflect the physics that occurs in transverse oscillations of a coronal loop, one needs to consider a smooth transition between the coronal loop and its surrounding ambient plasma. This allows for a resonance to occur between the local \Alfven waves and the fixed global kink wave.  \\ \\
+\subsection{Solutions For Region with Non-Homogeneous Density}
+The model is constructed to include the effects of the transitional layer for transverse oscillations. The transitional region is defined as the region between the internal plasma and ambient plasma. With the inclusion of the transition layer we redefine our boundary conditions as follows: 
+\begin{equation}
+\rho (r) = \left\{ \begin{array}{lll}
+         \rho_i & \mbox{if $r \leq R -l/2$} \\
+         \rho_{tr}(r) & \mbox{if $R -l/2 < r < R+l/2$}\\
+        \rho_e & \mbox{if $r \geq R +l/2$}.\end{array} \right.
+\end{equation}
+Clearly, the assumption for homogeneous density no longer holds in the transitional layer. In \cite{Soler_2013} they provide the mathematical model for transverse waves in a non-uniform medium. The purpose for including the transitional layer is to allow for a resonance to occur between the \Alfven and kink waves. We adopt $\beta = 0$ which means we neglect the gas pressure. This is a valid assumption for the corona as the magnetic pressure dominant over the gas pressure, therefore the Eulerian perturbation of the pressure is adapted to the following $P = \mathbf{B_1} \cdot \mathbf{B_0} / \mu_0$. By considering an inhomogeneous density we use the results obtained by \cite{Soler_2013} which gives the following governing wave equation to be solved:    
+\begin{equation}\label{q46}
+\frac{\partial^2 P}{\partial r^2} + \left[ \frac{1}{r} - \frac{\frac{d}{dr}\rho(r)(\omega^2-k^2_z V^2_A(r))}{\rho(r)(\omega^2-k_z^2V^2_A(r))} \right]\frac{\partial P}{\partial r} + \left[ \frac{\rho(r) (\omega^2-k_z^2 V^2_A(r))}{\frac{B^2}{\mu}} - \frac{1}{r} \right]P = 0 .
+\end{equation}
+Note that if one were to take the density as homogeneous, the third term in Eq. (\ref{q46}) would drop out and we would recover an equation akin to Eq. (\ref{q16}) for $\beta = 0$. Similar to the previously derived Eq. (\ref{q39}) and Eq. (\ref{q40}) the radial and azimuthal components of the Lagrangian displacements are as follows:
+\begin{equation}\label{q51}
+\xi_r = \frac{1}{\rho(r)(\omega^2-k^2_z v^2_A(r))} \frac{\partial P}{\partial r} ,
+\end{equation} 
+\begin{equation}\label{q52}
+\xi_{\phi} = \frac{1}{\rho(r)(\omega^2-k^2_z v^2_A(r))} \frac{im}{r}P .
+\end{equation}
+As $\beta=0$, the longitudinal component of the Lagrangian displacement is zero ($\xi_z=0$) because there are no motions along the magnetic field. Also, we redefine $\kappa$ as follows:
+\begin{equation} 
+\kappa^2 = \frac{\omega^2-k^2_z v^2_{A}}{v^2_{A}} .
+\end{equation}
+%and for the internal and external regions:
+%\begin{equation}\label{eq57}
+%\kappa_i = \frac{\omega^2-k_z^2 V_{A,i}^2}{V^2_{A,i}} ,
+%\end{equation}
+%\begin{equation}\label{eq58}
+%\kappa_e = - \frac{\omega^2-k_z^2 V_{A,e}^2}{V^2_{A,e}} .
+%\end{equation}
+Quantities belonging to the transitional layer are subscripted with $tr$. In this transitional layer there will be an \Alfven resonance ($r=r_A$) which is assumed to be a regular singular point. We use the method of Frobenius to obtain the solution to Eq. (\ref{q46}) as an infinite power series expansion around the resonance position. It is assumed there is only one resonance position and the selected density profile has an analytical solution at $r=r_A$. We introduce a change of variable:
+\begin{equation}\label{n13}
+\zeta \equiv r-r_A  .
+\end{equation}
+In this redefined radial coordinate, the boundary of the transitional layer are at the position $\zeta_i$ and $\zeta_e$, as follows:
+\begin{equation}\label{n27}
+\zeta_i = R-\frac{l}{2}-r_A , 
+\end{equation}
+\begin{equation}\label{n28}
+\zeta_e = R+\frac{l}{2}+r_A ,
+\end{equation}
+where $R$ is the radius of the coronal loop and $l$ is the length of the transitional region. We can see from Eq. (\ref{n27}) and Eq. (\ref{n28}) that the density profile moves when the resonant point moves. Using Eq. (\ref{n13}) and Eq. (\ref{n14}) into Eq. (\ref{q46}), it can be redefined as follows: 
+\begin{equation}
+\frac{\partial^2 P}{\partial \zeta^2} + \left[ \frac{1}{(\zeta + r_A)}- \frac{\frac{d}{d \zeta} f(\zeta)}{f(\zeta)} \right] \frac{\partial P}{\partial \zeta}+ \left( \frac{f(\zeta)}{\frac{B^2}{\mu_0}} - \frac{m}{(\zeta + r_A)^2}\right)P =0 ,
+\end{equation}
+\begin{equation}
+\begin{split}
+\zeta^2 (\zeta + r_A)^2 f(\zeta) \frac{\partial P}{\partial \zeta^2}+ \zeta^2 (\zeta + r_A) \left( f(\zeta) - (\zeta + r_A) \frac{\partial f}{\partial \zeta} \right) \frac{\partial P}{\partial \zeta} \\ + \zeta^2 \left( \frac{\mu_0}{B^2} (\zeta + r_A)^2 f^2(\zeta) - f(\zeta)m^2 \right)P = 0 , 
+\end{split}
+\end{equation}
+\begin{equation}\label{q49}
+\zeta^2 h(\zeta) \frac{\partial^2 P}{\partial \zeta^2} + \zeta p(\zeta) \frac{\partial P}{\partial \zeta} + q(\zeta)P = 0 ,
+\end{equation} 
+where the functions $h(\zeta)$, $p(\zeta)$, $q(\zeta)$ and $f(\zeta)$ are defined as follows:
+\begin{equation}
+h(\zeta) = (\zeta+r_A)^2 f(\zeta) ,
+\end{equation}
+\begin{equation}
+p(\zeta) = \zeta (\zeta+r_A) \left[ f(\zeta) - (\zeta+r_A) \frac{\partial f(\zeta)}{\partial \zeta}  \right] ,
+\end{equation}
+\begin{equation}
+q(\zeta) = \zeta^2 \left[ \frac{\mu_0}{B_0^2} (\zeta+r_a)^2 f^2(\zeta) - m^2 f(\zeta) \right] ,
+\end{equation}
+\begin{equation} \label{n14}
+f(\zeta) = \rho(\zeta)(\omega^2-k^2 v^2_A(\zeta))= \omega^2 \rho(\zeta) - k^2_z \frac{B_0^2}{\mu_0} .
+\end{equation}
+We assume that the density profile is an analytical function at the resonance position. Hence, we perform a Taylor series of $\rho (\zeta)$ around $\zeta=0$ as follows:
+\begin{equation}\label{n24}
+\rho(\zeta)=\sum_{k=0}^{\infty} \rho_k \zeta^k ,
+\end{equation}
+with $\rho_0=\rho(\zeta=0)=\rho(r=r_A)$ and
+\begin{equation}\label{q47}
+\rho_k = \left. \frac{1}{k!} \frac{d^k \rho(\zeta)}{dr^k} \right|_{\zeta=0} = \left. \frac{1}{k!} \frac{d^k \rho(r)}{dr^k} \right|_{r=r_A} .
+\end{equation}
+We express the solution to Eq. (\ref{q49}) in the form of series expansion around the regular singular point $\zeta=0$ as:
+\begin{equation}\label{q48}
+P_{tr} = \zeta^s \sum^{\infty}_{k=0} a_k \zeta^k ,
+\end{equation} 
+where $s$ is the Frobenius  index of the expansion and $a_k$ are coefficients to be determined. The value of the coefficients $a_k$ and $s_k$ depend on the density profile considered. Putting Eq. (\ref{q48}) into Eq. (\ref{q49}) determines the values of the index s obtained from the lowest power of $\zeta$. This leads to the indicial equation $s(s-2)=0$ obtained in \cite{Soler_2013}, with roots $s_1 =2$ and $s_2 = 0$. The general solution to equation (\ref{q49}) is the sum of two linearly independent solutions as follows:
+\begin{equation}
+P_1(\zeta) = \zeta^2 \sum^{\infty}_{k=0} a_k \zeta^k ,
+\end{equation}
+\begin{equation}
+P_2(\zeta) = \sum^{\infty}_{k=0} s_k \zeta^k+ C P_1(\zeta) \ln \zeta ,
+\end{equation}
+where $C$ is the coupling constant, $a_k$ and $s_k$ are series coefficients and are given in the appendix. The general solution to Eq. (\ref{q49}) is as follows:
+\begin{equation}\label{q50}
+P_{tr} = A_0 P_1(\zeta)+S_0 P_2(\zeta) , 
+\end{equation}
+where $A_0$ and $S_0$ are constants. Since the general solution to a 2nd order ODE contains two undetermined coefficients, we use $a_0=s_0=1$ with no loss of generality. The expressions $a_k$, $s_k$ and $C$ are obtained by putting Eq. (\ref{q50}) into Eq. (\ref{q49}). The coupling constant is independent of the choice of density profile and in \cite{Soler_2013} they obtain:
+\begin{equation}
+C = \frac{m^2}{2 r_A^2} .
+\end{equation}
+When $m=0$, $C=0$ and the singular series, $P_2(\zeta)$ becomes a regular series due to the absence of the logarithmic term. This means that there would be no resonance when $m=0$. The radial displacement $\xi_r$ is obtained by substituting Eq. (\ref{q50}) into Eq. (\ref{q51}), and the following is obtained: 
+\begin{equation}\label{n15}
+\begin{split}
+\xi_{r,tr} = & \frac{1}{\rho(r)(\omega^2-\omega_A^2(r))} \left[ A_0 \sum^{\infty}_{k=0}a_k(k+2)\zeta^{k+1} \right. \\ & \left. +S_0 \left( \sum^{\infty}_{k=0} s_k k \zeta^{k-1} + C \left( a_k(k+2) \zeta^{k+1} \ln \zeta + a_k \zeta^{k+1} \right) \right)  \right] .
+\end{split}
+\end{equation}
+In summary, we now have three regions, the internal, transitional and external. The transitional region density is inhomogeneous and solutions are given by Eq. (\ref{q50}) and Eq. (\ref{n15}). The solutions for the internal region at $r = R - \frac{l}{2}$ are given by:
+\begin{equation}\label{n16}
+P_i = A_i J_m[ \kappa_i(R- l/2)] , 
+\end{equation}
+\begin{equation}
+\xi_{r,i} = \frac{A_i \kappa_i}{\rho_i(\omega^2-\omega_{A,i}^2)}J^{\prime}_m\left[ \kappa_i \left( R- l/2 \right) \right] .
+\end{equation}
+The solutions for the transitional region, $r = R \pm l/2$ are shown:
+\begin{equation}\label{eq80}
+P_{tr,i,e} = A_0\sum^{\infty}_{k=0} a_k \zeta_{i,e}^{k+2}+S_0 \left( \sum^{\infty}_{k=0} s_k \zeta_{i,e}^k+ C\sum^{\infty}_{k=0} a_k \zeta_{i,e}^{k+2} \ln \zeta_{i,e} \right) ,
+\end{equation}
+\begin{equation}\label{eq81}
+\begin{split}
+\xi_{tr,i,e} = & \frac{1}{\rho(r)(\omega^2-\omega^2_A(r))} \left[ A_0 \sum^{\infty}_{k=0} a_k(k+2) \zeta_{i,e}^{k+1} \right. \\ & \left.   +S_0 \left( \sum^{\infty}_{k=0} s_k k \zeta_{i,e}^{k-1} +C \left( a_k (k+2) \zeta_{i,e}^{k+1} \ln \zeta_{i,e}+ a_k \zeta_{i,e}^{k+1} \right)  \right) \right] .
+\end{split}
+\end{equation}
+The solutions for the external region at $r = R+ \frac{l}{2}$ obtained are:
+\begin{equation}
+P_e = A_e K_m [\kappa_e(R+l/2)] ,
+\end{equation}
+\begin{equation}\label{n17}
+\xi_{e,r} = \frac{A_e \kappa_e}{\rho_e (\omega^2-\omega^2_{A,e})} K^{\prime}_m[\kappa_e(R+l/2)] .
+\end{equation}
+The next step is to link the solutions in the internal plasma and external region to the transitional region. This is achieved by using the four boundary conditions which are defined as follows: 
+\begin{equation}\label{n18}
+[P]^{tr}_i = P_{tr}-P_i=0 ,
+\end{equation}
+\begin{equation}
+[P]^e_{tr} = P_e - P_{tr} = 0 ,
+\end{equation}
+\begin{equation}
+[\xi]^{tr}_i = \xi_{tr}-\xi_i = 0 ,
+\end{equation}
+\begin{equation}\label{n19}
+[\xi]^{e}_{tr} = \xi_e - \xi_{tr} = 0 . 
+\end{equation}
+Using Eq. (\ref{n16}) to Eq. (\ref{n17}) into Eq. (\ref{n18}) to Eq. (\ref{n19}) gives:
+%Check notation for B_0 and B_1 in terms should they be B_{0,i} and B_{0,e} instead
+\begin{equation}\label{q53}
+[P]^{tr}_i =  A_0\sum^{\infty}_{k=0} a_k \zeta_i^{k+2}+S_0 \left( \sum^{\infty}_{k=0} s_k \zeta_i^k+ C\sum^{\infty}_{k=0} a_k \zeta_i^{k+2} \ln \zeta_i \right)-A_i J_m[ \kappa_i(R- l/2)]=0 ,
+\end{equation}
+\begin{equation}\label{q54}
+[P]^e_{tr} = A_e K_m [\kappa_e(R+l/2)] -  A_0\sum^{\infty}_{k=0} a_k \zeta_e^{k+2}-S_0 \left( \sum^{\infty}_{k=0} s_k \zeta_e^k+ C\sum^{\infty}_{k=0} a_k \zeta_e^{k+2} \ln \zeta_e \right) = 0 ,
+\end{equation}
+\begin{equation*}
+[\xi]^{r,tr}_i = \frac{1}{\sum^{\infty}_{k=0} \rho_k \zeta^k_{i} \omega^2-k_z^2 B_0^2/\mu_0} \left[ A_0 \sum^{\infty}_{k=0} a_k(k+2) \zeta_{i}^{k+1}+S_0 \left( \sum^{\infty}_{k=0} s_k k \zeta_{i}^{k-1}   \ \ \  \ \ \ \ \ \ \  \right. \right.  
+\end{equation*}
+\begin{equation}\label{q55}
++ \left. \left. C \left( a_k (k+2) \zeta_{i}^{k+1} \ln \zeta_{i}+ a_k \zeta^{k+1} \right) \right) \right]-\frac{A_i \kappa_i}{\rho_i(\omega^2-\omega_{A,i}^2)}J^{\prime}_m\left[ \kappa_i \left( R- l/2 \right) \right] = 0 ,
+\end{equation}
+\begin{equation*}
+[\xi]^{e}_{r,tr} = \frac{A_e \kappa_e}{\rho_e (\omega^2-\omega^2_{A,e})} K^{\prime}_m[\kappa_e(R+l/2)] - \frac{1}{\sum^{\infty}_{k=0} \rho_k \zeta^k_{e} \omega^2-k_z^2 B_0^2/\mu_0}  A_0 \sum^{\infty}_{k=0} a_k (k+2) \zeta_{e}^{k+1}
+\end{equation*} 
+\begin{equation}\label{q56}
+-\frac{1}{ \sum^{\infty}_{k=0} \rho_k \zeta^k_{e} \omega^2-k_z^2 B_0^2/\mu_0} S_0 \left( \sum^{\infty}_{k=0} s_k k \zeta_{e}^{k-1} +C \left( a_k (k+2) \zeta_{e}^{k+1} \ln \zeta_{e}+ a_k \zeta_e^{k+1} \right)  \right) = 0 .
+\end{equation}
+From Eq. (\ref{q53}) to Eq. (\ref{q56}) we can formulate the dispersion relation by collecting terms of the constants $A_i, A_e, A_0$ and $S_0$. This dispersion relation has a non-trival solution only when the matrix determinant is zero. At this moment in time I am to obtain the solutions numerically.
+\section{Overview of Future Plans}
+\subsection{First Year}
+Over the next few months I aim to improve my jet code with a stratified atmosphere. This includes smoothing out the initial jet input (e.g. use Gaussian profiles) and changing the implementation of my background atmosphere. Once the background atmosphere has been reimplemented I will carry out tests by adding small velocity perturbations to check the stability of the atmosphere. If done correctly results will match the simulations in \cite{Shelyag2008}. At this point will have a code in which we can expand upon to meet the year two targets. I plan to continue my side project by numerically solving the dispersion relation I have derived for forward modelling transverse waves in non-uniform flux tube. This will be interesting research as it could identify the observational features of resonant absorption and will lead to a publication as it is an expansion on the work done by \cite{Yuan_2016}. 
+\subsection{Second Year}
+The plans for the second year of my PhD is outlined in sections \eqref{sec1} and \eqref{sec2}.
+\subsubsection{The Generation and Properties of Transition Region Quakes (TRQ)} \label{sec1}
+We will conduct numerical modelling research into the effects of spicules on the transition region, focusing on whether spicules are the drivers of TRQs \citep{Scullion2011}. TRQ are energetic waves in the transition region that evolves in a similar manner to waves on 2D elastic waveguides. To achieve this, we will construct a large sample of TRQ using IRIS and infer their properties both from imaging and spectral data. The discovery of a link between these waves and Rapid Blueshifted Excursions (RBE) identified in CRISP H-alpha data is potentially very far reaching. Work by \cite{Henriques2016} has already found convincing evidence of links between RBEs and coronal transient events, however, they did not study whether their coronal features corresponded to coherent waves (i.e. TRQ manifesting as propagating wave fronts). This task is vital for expanding our knowledge of the coupling between the lower solar atmosphere and the transition region. Tasks and time line for the second year are outlined below:
+\begin{enumerate}
+\item Participate in SP2RC’s effort to create a database of TRQ, analyse their properties using IRIS and SDO data with the specific aim to investigate and search for coronal counterparts of transition region quakes (3 months). \label{b1}
+\item Explore the links between the locations of TRQs and the occurrence of RBEs and use this information to simulate the interaction in 3D (6 months). \label{b2}
+\item Model for alternative drivers of TRQs (e.g. shocks) in 3D simulations (3 months) and collaborate with PDRA (Chris Nelson) on validating modelling using Ca II 854.2 nm CRISP line profiles if \eqref{b2} returns a null result. My role will be providing the simulations. \label{b3}
+\end{enumerate}
+\subsubsection{3D Jet Formation in MHD-Case Study of The Relationship Between Spicules and Magnetic Bright Points (MBPs)} \label{sec2}
+The importance of small-scale jets is well known as they are suggested to contribute to coronal heating and solar wind acceleration. Spicules themselves may be triggered by magnetic reconnection \citep{Pontieu2007} or waves \citep{DePontieu2004}. Although, it is currently unclear what the decisive physical factors that trigger spicules, reconnection and waves are both promising candidates for their contribution to the energy exchange between the the lower cool atmosphere and the corona. Meanwhile, apparent transverse motion within spicules and intermittent Doppler-shifts in coronal loops could be evidence in support of the existence of \Alfven or kink waves in the solar atmosphere. SP2RC has a method for constructing 3D MHD equilibrium for multiple magnetic flux tubes in a stratified solar atmosphere. This solar atmospheric model incorporates a wide and realistic range of scales. Taking advantage of a steady state for the background, the governing equations can be reduced, solving only the evolution for the perturbations if we choose to use the Sheffield Advance Code. Capturing the true dynamics of these phenomena requires realistic flux tube models and this is the aim of this project. We will study the jet origin, excitation and multiple jet excitation employing a novel 3D MHD code. We will validate results with high-resolution data (e.g. CRISP) to gain insight into the relationship between various solar transients (e.g. jets, MBPs, RBE). By using this combination of numerical simulations and observations of the penetration of jets from the chromosphere, through the transition region into the corona, we will reveal how momentum and energy are transported to the upper atmosphere. \\ \\
+Observations have demonstrated the ubiquity of vortex motions present in the solar atmosphere. These are usually found at photospheric MBP groups. Previous MHD simulations have shown such vortices could be responsible for the generation of various types of MHD waves, yet their relationship with other ubiquitous transients-jets (spicules) is unclear. The outline and time frame for year two are shown below:
+\begin{enumerate}
+\item Modelling jet excitation by vortex motion in expanding flux tubes (4-6 months). \label{bp1}
+\item Case study: Employ our 3D MHD code to reveal the excitation of impulsive jet at MBP. Compare and validate the modelling with results from \eqref{bp1} (6 months).  
+\end{enumerate}
+\section{Summary of Progress on the Doctoral Development Programme}
+\subsection{Courses and Training}
+At the beginning of my post graduate studies I identified particular areas of professional aspects that I needed to learn or build upon to be successful in my research. I have attended the following course and training:
+\begin{enumerate}
+\item Waves (MAS315).\label{1}
+\item Magnetohydrodynamics (MAS422). \label{2}
+\item Computational Methods for Astrophysical Applications (part of a 2 week summer school lectures available online). \label{3}
+\item Research Ethics and Integrity module (FCP6101) and (FCP6102).\label{3.5}
+\item CIC6005: Application Development for HPC with the FORTRAN. \label{4}
+\item Parallel Computing with Matlab - 2 day course - by Mathworks. \label{5}
+\item Public engagement master class: Getting started with public engagement. \label{6}
+\item Public engagement master class: Radio broadcasting and the media. \label{7}
+\item Introduction to Science In Policy (SIP) and the SIP One day conference. \label{8}
+\item Entered POST note competition. \label{9}
+\item 2017 Mozilla Global Sprint.\label{10}
+\item CiCS Creative Media Workshops: Photography Skills. \label{12}
+\item Started a Coding Club in the SP2RC group. \label{11}
+\item Passed out-of-hours and fire safety tests.
+\end{enumerate}
+The purpose of \eqref{1}, \eqref{2} and \eqref{3} to strengthen my background knowledge, with \eqref{3} being focused on learning the AMRVAC software. One area me and supervisor identified I needed improve was my knowledge of FORTAN, thus I participated in \eqref{4} to help me better understand the syntax and programming structure used in high-level programming. I attended \eqref{5} to obtain a deeper understand of parallelization of codes and to learn new tricks in MATLAB. I went to both \eqref{6} and \eqref{7} as I want to get involved in public engagement. I have gone to \eqref{8} and this lead me to participate in \eqref{9} to gain experience in writing a POST note. This was done in a group of four and we had to write on the subject of The Hidden Costs of The NHS. This gave me the chance to collaborate with people from a variety of scientific backgrounds and how I can apply my skills to a completely different subject area. It gave me the perspective of how science is communicated in politics and of another career options open to scientists. I went to \eqref{10} which was a two day event where they advertised a range of open-source projects. I decided to make simple contributions to SunPy which is open source software for solar physics written using python. I will continue to make these simple contributions and eventually build up to making more significant additions to the software. This will improve my python programming, give me experience in being part of a programming community and lead to could future collaborations. I have recently set up \eqref{11} where one person presents their code and we discuss it as a group. The goal of this club is review code as group to improve the quality and usability of code throughout the group. Through this group people will be exposed to different style coding or may see parts other people codes that can be used for their own applications. This club is giving me experience in organisational and presentational skills. If the club is successful I may look to extend it to other research groups in SOMAS. I have attended numerous seminars available at the University (SP2RC, applied maths and student seminars) which gave me broader view of current research. I have been studying the Magnetohydrodynamics of the Sun book and attending the SP2RC book group. I am learning to use python FLASK to make websites as part of working on Sheffield Solar Catalogue (SSC) project.
+\subsection{Conferences} 
+I have attended the following summer schools/conferences:
+\begin{itemize}
+\item STFC Introductory Course in Solar System Plasma Physics 2016. 
+\item STFC Advanced Summer School in Solar System Physics 2016. 
+\item UKMHD 2017.
+\item National Astronomy Meeting (NAM) 2017 (yet to attend).
+\item 15th European Solar Physics Meeting 2017 (yet to attend and plan to present poster). 
+\item STFC Advanced Summer School in Solar System Physics 2017 (yet to attend).
+\item Progress Space Weather Summer School 2017 (yet to attend).
+\item International Conference on Numerical Simulation of Plasmas (ICNSP 2017) (TBC) 
+\end{itemize}
+The summer schools gave me a good introduction to the broader research area and gave an excellent opportunity to meet follow PhD students in the similar fields. UKMHD is the first conference I have attended was very interesting as I got to see an overview of many field research within solar physic and what currently are the ``big" issues being tackled in Solar physics. It allowed me to discuss research and chance to network with different solar groups. 
+\subsection{Outreach}
+I have plans for starting Coderdojo which there are not any in Sheffield. A Coderdojo is targeted at any young person aged 7 to 17, its essentially an after-school programming club where they can learn skills such as building a website, creating an app or a game, and explore technology in an informal, creative, and social environment. I believe it would be possible to get enough volunteers from the University to run these session. I need to work out location, funding (to pay for DBS checks) and identify schools that would be interested. This is in its early stages off planning but it believe that programming is a very important skill and exposing people to it as early as possible would be beneficiary for them and society. Through workshop \eqref{11} I obtain basic skills in photography which I plan to use for public outreach. My plan is to get involved in astrophotograph to create a blog filled photographs with step by step instructions and applying my background in mathematics, astronomy and astrophysics. I won the Great Research Bake Off Showstopper which was to present your research in cake form (see Fig. \ref{cake}). This was judged by Masterchef finalist Stuart Archer and was held to raise money for Weston Park Cancer Charity. \\ \\
+\begin{figure}
+  \centering
+    \includegraphics[width=0.40\textwidth]{sun_cake.png}
+  \caption{Solar physics cake for Great Research Bake Off Showstopper.}
+  \label{cake}
+\end{figure}
+\newpage
+\bibliographystyle{aasjournal}
+\bibliography{reference}
+\addcontentsline{toc}{chapter}{Bibliography}
+\newpage
+
+\end{document}

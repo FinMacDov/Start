@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Literature_Review.aux
+The style file: aasjournal.bst
+Database file #1: lit_bib.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Warning--empty publisher in Aschwanden_2005_psci
+Warning--empty publisher in Lang_2006ses
+You've used 22 entries,
+            3183 wiz_defined-function locations,
+            813 strings with 8578 characters,
+and the built_in function-call counts, 9661 in all, are:
+= -- 812
+> -- 609
+< -- 11
++ -- 206
+- -- 215
+* -- 755
+:= -- 1807
+add.period$ -- 22
+call.type$ -- 22
+change.case$ -- 144
+chr.to.int$ -- 22
+cite$ -- 24
+duplicate$ -- 413
+empty$ -- 675
+format.name$ -- 244
+if$ -- 1945
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 21
+newline$ -- 70
+num.names$ -- 89
+pop$ -- 169
+preamble$ -- 1
+purify$ -- 144
+quote$ -- 0
+skip$ -- 361
+stack$ -- 0
+substring$ -- 388
+swap$ -- 6
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 180
+warning$ -- 2
+while$ -- 82
+width$ -- 0
+write$ -- 221
+(There were 2 warnings)

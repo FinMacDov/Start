@@ -1,0 +1,1301 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.10.17)  17 JUL 2017 20:18
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**"1st year report.tex"
+(./1st year report.tex
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 4 languages loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty
+Package: fix-cm 2006/09/13 v1.1m fixes to LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/share/texmf/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/textpos/textpos.sty
+Package: textpos 2014/01/03 v1.7j
+
+Package: textpos 2014/01/03 1.7j, absolute positioning of text on the page
+\TP@textbox=\box26
+\TPHorizModule=\dimen105
+\TPVertModule=\dimen106
+\TP@margin=\dimen107
+\TP@absmargin=\dimen108
+Grid set 16 x 16 = 37.34424pt x 52.81541pt
+\TPboxrulesize=\dimen109
+\TP@tbargs=\toks15
+\TP@prevdepth=\dimen110
+) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/helvet.sty
+Package: helvet 2005/04/12 PSNFSS-v9.2a (WaS) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks16
+\ex@=\dimen111
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen112
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count88
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count89
+\leftroot@=\count90
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count91
+\DOTSCASE@=\count92
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box27
+\strutbox@=\box28
+\big@size=\dimen113
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count93
+\c@MaxMatrixCols=\count94
+\dotsspace@=\muskip10
+\c@parentequation=\count95
+\dspbrk@lvl=\count96
+\tag@help=\toks17
+\row@=\count97
+\column@=\count98
+\maxfields@=\count99
+\andhelp@=\toks18
+\eqnshift@=\dimen114
+\alignsep@=\dimen115
+\tagshift@=\dimen116
+\tagwidth@=\dimen117
+\totwidth@=\dimen118
+\lineht@=\dimen119
+\@envbody=\toks19
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/rotating/rotating.sty
+Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count100
+\rotFPtop=\skip46
+\rotFPbot=\skip47
+\rot@float@box=\box29
+\rot@mess@toks=\toks21
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+(/usr/share/texmf/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texmf/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks22
+)
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box30
+
+(/usr/share/texlive/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfrcs.code.tex
+Package: pgfrcs 2010/10/25 v2.10 (rcs-revision 1.24)
+))
+Package: pgf 2008/01/15 v2.10 (rcs-revision 1.12)
+
+(/usr/share/texmf/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texmf/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
+
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks23
+\pgfkeys@temptoks=\toks24
+
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks25
+))
+\pgf@x=\dimen120
+\pgf@y=\dimen121
+\pgf@xa=\dimen122
+\pgf@ya=\dimen123
+\pgf@xb=\dimen124
+\pgf@yb=\dimen125
+\pgf@xc=\dimen126
+\pgf@yc=\dimen127
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count101
+\c@pgf@countb=\count102
+\c@pgf@countc=\count103
+\c@pgf@countd=\count104
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Package pgfsys Info: Driver file for pgf: pgfsys-pdftex.def on input line 900.
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2009/05/22  (rcs-revision 1.26)
+
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2008/05/19  (rcs-revision 1.10)
+)))
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
+\pgfsyssoftpath@smallbuffer@items=\count105
+\pgfsyssoftpath@bigbuffer@items=\count106
+)
+(/usr/share/texmf/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+))
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
+
+(/usr/share/texmf/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen128
+\pgfmath@count=\count107
+\pgfmath@box=\box31
+\pgfmath@toks=\toks26
+\pgfmath@stack@operand=\toks27
+\pgfmath@stack@operation=\toks28
+)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.random.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.base.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.round.code.tex)
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex)))
+(/usr/share/texmf/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count108
+))
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
+\pgf@picminx=\dimen129
+\pgf@picmaxx=\dimen130
+\pgf@picminy=\dimen131
+\pgf@picmaxy=\dimen132
+\pgf@pathminx=\dimen133
+\pgf@pathmaxx=\dimen134
+\pgf@pathminy=\dimen135
+\pgf@pathmaxy=\dimen136
+\pgf@xx=\dimen137
+\pgf@xy=\dimen138
+\pgf@yx=\dimen139
+\pgf@yy=\dimen140
+\pgf@zx=\dimen141
+\pgf@zy=\dimen142
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2010/08/03  (rcs-revision 1.24)
+\pgf@path@lastx=\dimen143
+\pgf@path@lasty=\dimen144
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
+\pgf@shorten@end@additional=\dimen145
+\pgf@shorten@start@additional=\dimen146
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
+\pgfpic=\box32
+\pgf@hbox=\box33
+\pgf@layerbox@main=\box34
+\pgf@picture@serial@count=\count109
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
+\pgflinewidth=\dimen147
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2009/06/10  (rcs-revision 1.11)
+\pgf@pt@x=\dimen148
+\pgf@pt@y=\dimen149
+\pgf@pt@temp=\dimen150
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2008/10/09  (rcs-revision 1.8)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
+\pgf@max=\dimen151
+\pgf@sys@shading@range@num=\count110
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2010/03/25  (rcs-revision 1.16)
+
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2010/09/01  (rcs-revision 1.17)
+\pgfexternal@startupbox=\box35
+))
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2010/08/27  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2008/01/17  (rcs-revision 1.2)
+)
+(/usr/share/texmf/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2009/07/02  (rcs-revision 1.3)
+)))
+(/usr/share/texmf/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2010/09/09  (rcs-revision 1.13)
+\pgfnodeparttextbox=\box36
+)
+(/usr/share/texmf/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
+)
+(/usr/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen152
+\pgf@nodesepend=\dimen153
+)
+(/usr/share/texmf/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
+))
+(/usr/share/texmf/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texmf/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texmf/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
+\pgffor@iter=\dimen154
+\pgffor@skip=\dimen155
+\pgffor@stack=\toks29
+\pgffor@toks=\toks30
+))
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
+
+(/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
+\pgf@plot@mark@count=\count111
+\pgfplotmarksize=\dimen156
+)
+\tikz@lastx=\dimen157
+\tikz@lasty=\dimen158
+\tikz@lastxsaved=\dimen159
+\tikz@lastysaved=\dimen160
+\tikzleveldistance=\dimen161
+\tikzsiblingdistance=\dimen162
+\tikz@figbox=\box37
+\tikz@tempbox=\box38
+\tikztreelevel=\count112
+\tikznumberofchildren=\count113
+\tikznumberofcurrentchild=\count114
+\tikz@fig@count=\count115
+
+(/usr/share/texmf/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
+\pgfmatrixcurrentrow=\count116
+\pgfmatrixcurrentcolumn=\count117
+\pgf@matrix@numberofcolumns=\count118
+)
+\tikz@expandcount=\count119
+
+(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopat
+hs.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
+))) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+Package: pdflscape 2008/08/11 v0.10 Display of landscape pages in PDF (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
+
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+))
+(/usr/share/texlive/texmf-dist/tex/latex/placeins/placeins.sty
+Package: placeins 2005/04/18  v 2.2
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/afterpage.sty
+Package: afterpage 1995/10/27 v1.08 After-Page Package (DPC)
+\AP@output=\toks31
+\AP@partial=\box39
+\AP@footins=\box40
+)
+(/usr/share/texlive/texmf-dist/tex/latex/capt-of/capt-of.sty
+Package: capt-of 2009/12/29 v0.2 standard captions outside of floats
+)
+(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2011/09/28 v3.5.2 Customized lists
+\labelindent=\skip48
+\enit@outerparindent=\dimen163
+\enit@toks=\toks32
+\enit@inbox=\box41
+\enitdp@description=\count120
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen164
+\captionmargin@=\dimen165
+\captionwidth=\dimen166
+\caption@tempdima=\dimen167
+\caption@indent=\dimen168
+\caption@parindent=\dimen169
+\caption@hangindent=\dimen170
+)
+\c@ContinuedFloat=\count121
+Package caption Info: rotating package is loaded.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+\c@subfigure=\count122
+\c@subtable=\count123
+)
+(./aas_macros.sty) (./natbib.sty
+Package: natbib 2006/03/22 7.3 (PWD)
+\bibhang=\skip49
+\bibsep=\skip50
+LaTeX Info: Redefining \cite on input line 541.
+\c@NAT@ctr=\count124
+)
+No file "1st year report".aux.
+\openout1 = `"1st year report.aux"'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count125
+\scratchdimen=\dimen171
+\scratchbox=\box42
+\nofMPsegments=\count126
+\nofMParguments=\count127
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count128
+\MPscratchDim=\dimen172
+\MPnumerator=\count129
+\makeMPintoPDFobject=\count130
+\everyMPtoPDFconversion=\toks34
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+ABD: EveryShipout initializing macros
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+
+<logo_uni2.jpg, id=4, 501.875pt x 222.8325pt>
+File: logo_uni2.jpg Graphic file (type jpg)
+ <use logo_uni2.jpg>
+Package pdftex.def Info: logo_uni2.jpg used on input line 44.
+(pdftex.def)             Requested size: 227.62204pt x 101.06593pt.
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./logo_uni2.jpg>]
+LaTeX Font Info:    Try loading font information for U+msa on input line 64.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 64.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \hbox (badness 10000) in paragraph at lines 63--86
+
+ []
+
+[0]
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no “ in font cmr12!
+
+
+Package natbib Warning: Citation `Beckers1968' on page 1 undefined on input lin
+e 96.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--98
+
+ []
+
+[1
+
+]
+
+LaTeX Warning: Reference `rd' on page 2 undefined on input line 123.
+
+
+LaTeX Warning: Reference `rd' on page 2 undefined on input line 123.
+
+
+LaTeX Warning: File `figs/sims/randomdensity/rd_merg.png' not found on input li
+ne 126.
+
+
+! Package pdftex.def Error: File `figs/sims/randomdensity/rd_merg.png' not foun
+d.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.126 ...dth]{figs/sims/randomdensity/rd_merg.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Reference `jslab' on page 2 undefined on input line 130.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 131.
+
+
+LaTeX Warning: File `figs/sims/jetcloudinteraction/jetslab_merg.png' not found 
+on input line 133.
+
+
+! Package pdftex.def Error: File `figs/sims/jetcloudinteraction/jetslab_merg.pn
+g' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.133 ...ims/jetcloudinteraction/jetslab_merg.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no “ in font cmr12!
+
+LaTeX Warning: Reference `promRT' on page 2 undefined on input line 137.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 138.
+
+
+LaTeX Warning: File `figs/sims/promRT/mergePromRT.png' not found on input line 
+140.
+
+
+! Package pdftex.def Error: File `figs/sims/promRT/mergePromRT.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.140 ...twidth]{figs/sims/promRT/mergePromRT.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: Reference `HD_g_jet' on page 2 undefined on input line 144.
+
+
+LaTeX Warning: File `figs/sims/hd_g_jet/hd_g_jet.png' not found on input line 1
+47.
+
+
+! Package pdftex.def Error: File `figs/sims/hd_g_jet/hd_g_jet.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.147 ...xtwidth]{figs/sims/hd_g_jet/hd_g_jet.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--151
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--151
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--151
+
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3]
+[4]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `fig:test' on page 5 undefined on input line 152.
+
+
+Package natbib Warning: Citation `Vernazza1981' on page 5 undefined on input li
+ne 152.
+
+
+Package natbib Warning: Citation `McWhirter1975' on page 5 undefined on input l
+ine 152.
+
+[5]
+
+LaTeX Warning: Reference `eq2' on page 6 undefined on input line 172.
+
+[6]
+
+LaTeX Warning: Reference `eq2' on page 7 undefined on input line 180.
+
+
+LaTeX Warning: Reference `igl' on page 7 undefined on input line 184.
+
+
+LaTeX Warning: Reference `eq7' on page 7 undefined on input line 184.
+
+
+LaTeX Warning: Reference `ODE' on page 7 undefined on input line 188.
+
+
+LaTeX Warning: Reference `eq13' on page 7 undefined on input line 200.
+
+
+LaTeX Warning: Reference `SHP' on page 7 undefined on input line 204.
+
+
+LaTeX Warning: Reference `fig:test' on page 7 undefined on input line 204.
+
+
+LaTeX Warning: Reference `MHD_jet_g' on page 7 undefined on input line 204.
+
+
+LaTeX Warning: Reference `MHD_jet_g' on page 7 undefined on input line 204.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 205.
+
+
+LaTeX Warning: File `figs/sims/mhd_g_jet/mhd_g_jet.png' not found on input line
+ 207.
+
+
+! Package pdftex.def Error: File `figs/sims/mhd_g_jet/mhd_g_jet.png' not found.
+
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.207 ...width]{figs/sims/mhd_g_jet/mhd_g_jet.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 213.
+
+
+LaTeX Warning: File `figs/rho_profile.png' not found on input line 217.
+
+
+! Package pdftex.def Error: File `figs/rho_profile.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.217 ...dth=0.75\textwidth]{figs/rho_profile.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `figs/te.png' not found on input line 223.
+
+
+! Package pdftex.def Error: File `figs/te.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.223 ...aphics[width=0.75\textwidth]{figs/te.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Package natbib Warning: Citation `Vernazza1981' on page 7 undefined on input li
+ne 227.
+
+
+Package natbib Warning: Citation `McWhirter1975' on page 7 undefined on input l
+ine 227.
+
+
+Package natbib Warning: Citation `Vernazza1981' on page 7 undefined on input li
+ne 227.
+
+
+Package natbib Warning: Citation `McWhirter1975' on page 7 undefined on input l
+ine 227.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 203--230
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 203--230
+
+ []
+
+
+Package natbib Warning: Citation `Wiegelmann2012' on page 7 undefined on input 
+line 231.
+
+
+LaTeX Warning: Reference `LFFF' on page 7 undefined on input line 231.
+
+
+LaTeX Warning: File `figs/sims/LFFF/test_pol_2.png' not found on input line 235
+.
+
+
+! Package pdftex.def Error: File `figs/sims/LFFF/test_pol_2.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.235 ...textwidth]{figs/sims/LFFF/test_pol_2.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Package natbib Warning: Citation `Porth2014' on page 7 undefined on input line 
+239.
+
+
+LaTeX Warning: Reference `PFSS' on page 7 undefined on input line 239.
+
+
+LaTeX Warning: File `figs/sims/PFFS/PFFS.png' not found on input line 267.
+
+
+! Package pdftex.def Error: File `figs/sims/PFFS/PFFS.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.267 ...=0.75\textwidth]{figs/sims/PFFS/PFFS.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[7] [8] [9]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[10]
+
+Package natbib Warning: Citation `Antolin_2015a' on page 11 undefined on input 
+line 272.
+
+
+Package natbib Warning: Citation `Ruderman2009' on page 11 undefined on input l
+ine 274.
+
+[11]
+
+LaTeX Warning: Reference `q5' on page 12 undefined on input line 304.
+
+
+LaTeX Warning: Reference `q9' on page 12 undefined on input line 312.
+
+
+LaTeX Warning: File `figs/plasma.PNG' not found on input line 318.
+
+
+! Package pdftex.def Error: File `figs/plasma.PNG' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.318 ...cs[width=0.35\textwidth]{figs/plasma.PNG}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Package natbib Warning: Citation `Ruderman2009' on page 12 undefined on input l
+ine 319.
+
+
+Package natbib Warning: Citation `Ruderman2009' on page 12 undefined on input l
+ine 319.
+
+
+LaTeX Warning: Reference `fig_3' on page 12 undefined on input line 322.
+
+
+LaTeX Warning: Reference `q10' on page 12 undefined on input line 322.
+
+
+Package natbib Warning: Citation `Van_Doorsselaere2008' on page 12 undefined on
+ input line 327.
+
+[12]
+
+LaTeX Warning: Reference `q1' on page 13 undefined on input line 331.
+
+
+LaTeX Warning: Reference `q8' on page 13 undefined on input line 331.
+
+
+Package natbib Warning: Citation `Ruderman2009' on page 13 undefined on input l
+ine 331.
+
+
+LaTeX Warning: Reference `q16' on page 13 undefined on input line 353.
+
+
+LaTeX Warning: Reference `q21' on page 13 undefined on input line 353.
+
+
+LaTeX Warning: Reference `q16' on page 13 undefined on input line 353.
+
+
+LaTeX Warning: Reference `q21' on page 13 undefined on input line 353.
+
+
+LaTeX Warning: Reference `q16' on page 13 undefined on input line 353.
+
+[13]
+
+LaTeX Warning: Reference `n4' on page 14 undefined on input line 369.
+
+
+LaTeX Warning: Reference `n5' on page 14 undefined on input line 369.
+
+
+LaTeX Warning: Reference `q16' on page 14 undefined on input line 369.
+
+
+LaTeX Warning: Reference `n6' on page 14 undefined on input line 377.
+
+
+LaTeX Warning: Reference `n7' on page 14 undefined on input line 381.
+
+
+LaTeX Warning: Reference `n8' on page 14 undefined on input line 385.
+
+
+LaTeX Warning: Reference `q17' on page 14 undefined on input line 385.
+
+
+LaTeX Warning: Reference `q18' on page 14 undefined on input line 385.
+
+
+LaTeX Warning: Reference `q19' on page 14 undefined on input line 395.
+
+[14]
+
+LaTeX Warning: Reference `q20' on page 15 undefined on input line 399.
+
+
+Package natbib Warning: Citation `Ruderman2009' on page 15 undefined on input l
+ine 403.
+
+
+LaTeX Warning: Reference `q38' on page 15 undefined on input line 423.
+
+
+LaTeX Warning: Reference `q38' on page 15 undefined on input line 423.
+
+
+LaTeX Warning: Reference `q43' on page 15 undefined on input line 423.
+
+
+LaTeX Warning: Reference `q38' on page 15 undefined on input line 423.
+
+
+LaTeX Warning: Reference `n9' on page 15 undefined on input line 427.
+
+
+LaTeX Warning: Reference `q39' on page 15 undefined on input line 427.
+
+
+LaTeX Warning: Reference `q38' on page 15 undefined on input line 431.
+
+
+LaTeX Warning: Reference `n10' on page 15 undefined on input line 435.
+
+
+LaTeX Warning: Reference `q39' on page 15 undefined on input line 435.
+
+[15]
+
+LaTeX Warning: Reference `n12' on page 16 undefined on input line 439.
+
+
+Package natbib Warning: Citation `Yuan_2016' on page 16 undefined on input line
+ 455.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 454--456
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 454--456
+
+ []
+
+
+Package natbib Warning: Citation `Soler_2013' on page 16 undefined on input lin
+e 464.
+
+
+Package natbib Warning: Citation `Soler_2013' on page 16 undefined on input lin
+e 464.
+
+[16]
+
+LaTeX Warning: Reference `q46' on page 17 undefined on input line 468.
+
+
+LaTeX Warning: Reference `q16' on page 17 undefined on input line 468.
+
+
+LaTeX Warning: Reference `q39' on page 17 undefined on input line 468.
+
+
+LaTeX Warning: Reference `q40' on page 17 undefined on input line 468.
+
+
+LaTeX Warning: Reference `q46' on page 17 undefined on input line 486.
+
+
+LaTeX Warning: Reference `n27' on page 17 undefined on input line 497.
+
+
+LaTeX Warning: Reference `n28' on page 17 undefined on input line 497.
+
+
+LaTeX Warning: Reference `n13' on page 17 undefined on input line 497.
+
+
+LaTeX Warning: Reference `n14' on page 17 undefined on input line 497.
+
+
+LaTeX Warning: Reference `q46' on page 17 undefined on input line 497.
+
+[17]
+
+LaTeX Warning: Reference `q49' on page 18 undefined on input line 530.
+
+
+LaTeX Warning: Reference `q48' on page 18 undefined on input line 534.
+
+
+LaTeX Warning: Reference `q49' on page 18 undefined on input line 534.
+
+
+Package natbib Warning: Citation `Soler_2013' on page 18 undefined on input lin
+e 534.
+
+
+LaTeX Warning: Reference `q49' on page 18 undefined on input line 534.
+
+
+LaTeX Warning: Reference `q49' on page 18 undefined on input line 541.
+
+
+LaTeX Warning: Reference `q50' on page 18 undefined on input line 545.
+
+
+LaTeX Warning: Reference `q49' on page 18 undefined on input line 545.
+
+
+Package natbib Warning: Citation `Soler_2013' on page 18 undefined on input lin
+e 545.
+
+
+LaTeX Warning: Reference `q50' on page 18 undefined on input line 549.
+
+
+LaTeX Warning: Reference `q51' on page 18 undefined on input line 549.
+
+[18]
+
+LaTeX Warning: Reference `q50' on page 19 undefined on input line 555.
+
+
+LaTeX Warning: Reference `n15' on page 19 undefined on input line 555.
+
+
+LaTeX Warning: Reference `n16' on page 19 undefined on input line 591.
+
+
+LaTeX Warning: Reference `n17' on page 19 undefined on input line 591.
+
+
+LaTeX Warning: Reference `n18' on page 19 undefined on input line 591.
+
+
+LaTeX Warning: Reference `n19' on page 19 undefined on input line 591.
+
+[19]
+
+LaTeX Warning: Reference `q53' on page 20 undefined on input line 611.
+
+
+LaTeX Warning: Reference `q56' on page 20 undefined on input line 611.
+
+
+Package natbib Warning: Citation `Shelyag2008' on page 20 undefined on input li
+ne 614.
+
+
+Package natbib Warning: Citation `Yuan_2016' on page 20 undefined on input line
+ 614.
+
+
+LaTeX Warning: Reference `sec1' on page 20 undefined on input line 616.
+
+
+LaTeX Warning: Reference `sec2' on page 20 undefined on input line 616.
+
+
+Package natbib Warning: Citation `Scullion2011' on page 20 undefined on input l
+ine 618.
+
+
+Package natbib Warning: Citation `Henriques2016' on page 20 undefined on input 
+line 618.
+
+[20]
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+
+
+LaTeX Warning: Reference `b2' on page 21 undefined on input line 622.
+
+
+Package natbib Warning: Citation `Pontieu2007' on page 21 undefined on input li
+ne 625.
+
+
+Package natbib Warning: Citation `DePontieu2004' on page 21 undefined on input 
+line 625.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 625--628
+
+ []
+
+[21]
+
+LaTeX Warning: Reference `bp1' on page 22 undefined on input line 629.
+
+
+LaTeX Warning: Reference `1' on page 22 undefined on input line 650.
+
+
+LaTeX Warning: Reference `2' on page 22 undefined on input line 650.
+
+
+LaTeX Warning: Reference `3' on page 22 undefined on input line 650.
+
+
+LaTeX Warning: Reference `3' on page 22 undefined on input line 650.
+
+
+LaTeX Warning: Reference `4' on page 22 undefined on input line 650.
+
+
+LaTeX Warning: Reference `5' on page 22 undefined on input line 650.
+
+
+LaTeX Warning: Reference `6' on page 22 undefined on input line 650.
+
+
+LaTeX Warning: Reference `7' on page 22 undefined on input line 650.
+
+
+LaTeX Warning: Reference `8' on page 22 undefined on input line 650.
+
+
+LaTeX Warning: Reference `9' on page 22 undefined on input line 650.
+
+
+LaTeX Warning: Reference `10' on page 22 undefined on input line 650.
+
+
+LaTeX Warning: Reference `11' on page 22 undefined on input line 650.
+
+[22]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 654.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 654.
+ [23]
+
+LaTeX Warning: Reference `11' on page 24 undefined on input line 665.
+
+
+LaTeX Warning: Reference `cake' on page 24 undefined on input line 665.
+
+
+LaTeX Warning: File `sun_cake.png' not found on input line 668.
+
+
+! Package pdftex.def Error: File `sun_cake.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.668 ...phics[width=0.40\textwidth]{sun_cake.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 665--672
+
+ []
+
+[24]
+No file "1st year report".bbl.
+
+Package natbib Warning: There were undefined citations.
+
+(./1st year report.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 13173 strings out of 494985
+ 237740 string characters out of 6180355
+ 283756 words of memory out of 5000000
+ 16078 multiletter control sequences out of 15000+600000
+ 13979 words of font info for 51 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 56i,18n,57p,2484b,502s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbsy10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
+7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on "1st year report.pdf" (26 pages, 304195 bytes).
+PDF statistics:
+ 165 PDF objects out of 1000 (max. 8388607)
+ 116 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+

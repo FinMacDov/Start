@@ -1,0 +1,94 @@
+\begin{thebibliography}{}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{{Antolin} {et~al.}(2015){Antolin}, {Okamoto}, {De Pontieu},
+  {Uitenbroek}, {Van Doorsselaere}, \& {Yokoyama}}]{Antolin_2015b}
+{Antolin}, P., {Okamoto}, T.~J., {De Pontieu}, B., {et~al.} 2015, \apj, 809, 72
+
+\bibitem[{{Aschwanden}(2005)}]{Aschwanden_2005_psci}
+{Aschwanden}, M.~J. 2005, {Physics of the Solar Corona. An Introduction with
+  Problems and Solutions (2nd edition)}
+
+\bibitem[{{Beckers}(1968)}]{Beckers1968}
+{Beckers}, J.~M. 1968, Solar Physic, 3, 367
+
+\bibitem[{{De Moortel} {et~al.}(2000){De Moortel}, {Hood}, \&
+  {Arber}}]{De_Moortel_2000_A}
+{De Moortel}, I., {Hood}, A.~W., \& {Arber}, T.~D. 2000, \aap, 354, 334
+
+\bibitem[{{De Moortel} {et~al.}(1999){De Moortel}, {Hood}, {Ireland}, \&
+  {Arber}}]{De_Moortel_1999_A}
+{De Moortel}, I., {Hood}, A.~W., {Ireland}, J., \& {Arber}, T.~D. 1999, \aap,
+  346, 641
+
+\bibitem[{{De Moortel} {et~al.}(2003){De Moortel}, {Parnell}, \&
+  {Hood}}]{De_Moortel_2003SoPh}
+{De Moortel}, I., {Parnell}, C.~E., \& {Hood}, A.~W. 2003, \solphys, 215, 69
+
+\bibitem[{De~Pontieu {et~al.}(2004)De~Pontieu, Erdelyi, \&
+  James}]{DePontieu2004}
+De~Pontieu, B., Erdelyi, R., \& James, S.~P. 2004, Nature, 430, 536
+
+\bibitem[{{De Pontieu} {et~al.}(2007){De Pontieu}, {McIntosh}, {Hansteen},
+  {Carlsson}, {Schrijver}, {Tarbell}, {Title}, {Shine}, {Suematsu}, {Tsuneta},
+  {Katsukawa}, {Ichimoto}, {Shimizu}, \& {Nagata}}]{Pontieu2007}
+{De Pontieu}, B., {McIntosh}, S., {Hansteen}, V.~H., {et~al.} 2007, \pasj, 59,
+  S655
+
+\bibitem[{Goedbloed \& Poedts(2004)}]{goedbloed2004principles}
+Goedbloed, J.~P., \& Poedts, S. 2004, Principles of magnetohydrodynamics: with
+  applications to laboratory and astrophysical plasmas (Cambridge university
+  press)
+
+\bibitem[{{Henriques} {et~al.}(2016){Henriques}, {Kuridze}, {Mathioudakis}, \&
+  {Keenan}}]{Henriques2016}
+{Henriques}, V.~M.~J., {Kuridze}, D., {Mathioudakis}, M., \& {Keenan}, F.~P.
+  2016, \apj, 820, 124
+
+\bibitem[{{Heyvaerts} \& {Priest}(1983)}]{Heyvaerts_1983_A}
+{Heyvaerts}, J., \& {Priest}, E.~R. 1983, \aap, 117, 220
+
+\bibitem[{{Hollweg}(1991)}]{Hollweg_1991_mcch}
+{Hollweg}, J.~V. 1991, in Mechanisms of Chromospheric and Coronal Heating, ed.
+  P.~{Ulmschneider}, E.~R. {Priest}, \& R.~{Rosner}, 260
+
+\bibitem[{{Hood} {et~al.}(1997){Hood}, {Gonzalez-Delgado}, \&
+  {Ireland}}]{Hood_1997_A}
+{Hood}, A.~W., {Gonzalez-Delgado}, D., \& {Ireland}, J. 1997, \aap, 324, 11
+
+\bibitem[{{Lang}(2006)}]{Lang_2006ses}
+{Lang}, K.~R. 2006, {Sun, Earth and Sky}
+
+\bibitem[{{Mullan}(2009)}]{mullan2009physics}
+{Mullan}, D. 2009, {Physics of the Sun: A First Course}, Pure and Applied
+  Physics (CRC Press)
+
+\bibitem[{{Nakariakov} \& {Ofman}(2001)}]{Nakariakov_2001}
+{Nakariakov}, V.~M., \& {Ofman}, L. 2001, \aap, 372, L53
+
+\bibitem[{{Narain} \& {Pandey}(2006)}]{Narain_2006JApA}
+{Narain}, U., \& {Pandey}, K. 2006, Journal of Astrophysics and Astronomy, 27,
+  93
+
+\bibitem[{Narayanan(2014)}]{narayanan2014introduction}
+Narayanan, A. 2014, An Introduction to Waves and Oscillations in the Sun,
+  Astronomy and Astrophysics Library (Springer New York)
+
+\bibitem[{{Okamoto} {et~al.}(2015){Okamoto}, {Antolin}, {De Pontieu},
+  {Uitenbroek}, {Van Doorsselaere}, \& {Yokoyama}}]{Antolin_2015a}
+{Okamoto}, T.~J., {Antolin}, P., {De Pontieu}, B., {et~al.} 2015, \apj, 809, 71
+
+\bibitem[{Priest(2014)}]{priest2014magnetohydrodynamics}
+Priest, E. 2014, Magnetohydrodynamics of the Sun (Cambridge University Press)
+
+\bibitem[{{Scullion} {et~al.}(2011){Scullion}, {Erd{\'e}lyi}, {Fedun}, \&
+  {Doyle}}]{Scullion2011}
+{Scullion}, E., {Erd{\'e}lyi}, R., {Fedun}, V., \& {Doyle}, J.~G. 2011, \apj,
+  743, 14
+
+\bibitem[{{Verwichte} {et~al.}(2013){Verwichte}, {Van Doorsselaere}, {White},
+  \& {Antolin}}]{Verwichte_2013A_A}
+{Verwichte}, E., {Van Doorsselaere}, T., {White}, R.~S., \& {Antolin}, P. 2013,
+  \aap, 552, A138
+
+\end{thebibliography}

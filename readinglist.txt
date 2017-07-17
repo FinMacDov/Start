@@ -32,5 +32,11 @@ http://www.sciencedirect.com/science/article/pii/S2211379716305617
 Phd Thesis Dynamics of the solar atmosphere and solar wind modeling: 
 https://perswww.kuleuven.be/~u0016541/MHD_sheets_pdf/thesisSofia.pdf
 
+Nova reminant:
+http://chandra.harvard.edu/photo/2011/tycho/
 
+Thesis on Relativistic jets with AMRVAC code in apendexic:
+https://perswww.kuleuven.be/~u0016541/MHD_sheets_pdf/thesisRemi.pdf
 
+Pulse in random density background:
+http://wrap.warwick.ac.uk/64736/1/WRAP_Nakariakov_1411.4152v1.pdf

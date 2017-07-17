@@ -305,10 +305,11 @@ However, when gravitational stratification of the solar corona is included in th
 \label{fig_14}
 \end{figure} 
 \subsection{MPI-AMRVAC}
-MPI-AMRVAC is an MPI-parallelized Adaptive Mesh Refinement code. AMRVAC solves a systems of hyperbolic partial differential equations by a number of different numerical schemes. In principle the ARMVAC handles anything of the generic form: 
+MPI-AMRVAC in a numerical code, developed in Fortran 90 parallezied with Message Passing Interface(MPI) \citep{Keppens2012}. The code aims to solve any systems of hyperbolic partial differential e.g. it handles anything of the following generic form: 
 \begin{equation}
 \frac{\partial \boldsymbol{U}}{\partial t} + \nabla \cdot \boldsymbol{F}(\boldsymbol{U}) = \boldsymbol{S}_{phys} (\boldsymbol{U}, \partial_{i} \boldsymbol{U}, \partial_i \partial_j \boldsymbol{U},\boldsymbol{x},t) .
 \end{equation}
+ by a using a number of different spatial and temporal numerical discretizations.
 %solves the MHD equations in the following form:
 %\begin{equation}
 %\frac{\partial \rho}{\partial t} + \nabla \cdot (\boldsymbol{v} \rho) = 0 ,

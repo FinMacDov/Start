@@ -6,45 +6,45 @@ Database file #1: lit_bib.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--empty publisher in Aschwanden_2005_psci
 Warning--empty publisher in Lang_2006ses
-You've used 22 entries,
+You've used 23 entries,
             3183 wiz_defined-function locations,
-            813 strings with 8578 characters,
-and the built_in function-call counts, 9661 in all, are:
-= -- 812
-> -- 609
+            822 strings with 8868 characters,
+and the built_in function-call counts, 10231 in all, are:
+= -- 860
+> -- 657
 < -- 11
-+ -- 206
-- -- 215
-* -- 755
-:= -- 1807
-add.period$ -- 22
-call.type$ -- 22
-change.case$ -- 144
-chr.to.int$ -- 22
-cite$ -- 24
-duplicate$ -- 413
-empty$ -- 675
-format.name$ -- 244
-if$ -- 1945
++ -- 223
+- -- 234
+* -- 806
+:= -- 1916
+add.period$ -- 23
+call.type$ -- 23
+change.case$ -- 154
+chr.to.int$ -- 23
+cite$ -- 25
+duplicate$ -- 432
+empty$ -- 703
+format.name$ -- 263
+if$ -- 2055
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 21
-newline$ -- 70
-num.names$ -- 89
-pop$ -- 169
+missing$ -- 22
+newline$ -- 73
+num.names$ -- 93
+pop$ -- 180
 preamble$ -- 1
-purify$ -- 144
+purify$ -- 154
 quote$ -- 0
-skip$ -- 361
+skip$ -- 376
 stack$ -- 0
-substring$ -- 388
+substring$ -- 409
 swap$ -- 6
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 180
+type$ -- 189
 warning$ -- 2
-while$ -- 82
+while$ -- 86
 width$ -- 0
-write$ -- 221
+write$ -- 231
 (There were 2 warnings)

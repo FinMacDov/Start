@@ -3,48 +3,51 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Literature_Review.aux
 The style file: aasjournal.bst
 Database file #1: lit_bib.bib
+Warning--string name "a16" is undefined
+--line 798 of file lit_bib.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--empty publisher in Aschwanden_2005_psci
+Warning--empty publisher in Griffiths2013
 Warning--empty publisher in Lang_2006ses
-You've used 23 entries,
+You've used 32 entries,
             3183 wiz_defined-function locations,
-            822 strings with 8868 characters,
-and the built_in function-call counts, 10231 in all, are:
-= -- 860
-> -- 657
-< -- 11
-+ -- 223
-- -- 234
-* -- 806
-:= -- 1916
-add.period$ -- 23
-call.type$ -- 23
-change.case$ -- 154
-chr.to.int$ -- 23
-cite$ -- 25
-duplicate$ -- 432
-empty$ -- 703
-format.name$ -- 263
-if$ -- 2055
-int.to.chr$ -- 1
+            888 strings with 10465 characters,
+and the built_in function-call counts, 14563 in all, are:
+= -- 1228
+> -- 969
+< -- 13
++ -- 329
+- -- 349
+* -- 1180
+:= -- 2728
+add.period$ -- 32
+call.type$ -- 32
+change.case$ -- 218
+chr.to.int$ -- 31
+cite$ -- 35
+duplicate$ -- 603
+empty$ -- 960
+format.name$ -- 387
+if$ -- 2913
+int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 22
-newline$ -- 73
-num.names$ -- 93
-pop$ -- 180
+missing$ -- 30
+newline$ -- 100
+num.names$ -- 129
+pop$ -- 248
 preamble$ -- 1
-purify$ -- 154
+purify$ -- 218
 quote$ -- 0
-skip$ -- 376
+skip$ -- 513
 stack$ -- 0
-substring$ -- 409
-swap$ -- 6
+substring$ -- 591
+swap$ -- 8
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 189
-warning$ -- 2
-while$ -- 86
+type$ -- 270
+warning$ -- 3
+while$ -- 120
 width$ -- 0
-write$ -- 231
-(There were 2 warnings)
+write$ -- 323
+(There were 4 warnings)

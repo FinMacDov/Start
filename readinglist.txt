@@ -40,3 +40,9 @@ https://perswww.kuleuven.be/~u0016541/MHD_sheets_pdf/thesisRemi.pdf
 
 Pulse in random density background:
 http://wrap.warwick.ac.uk/64736/1/WRAP_Nakariakov_1411.4152v1.pdf
+
+A Tale Of Two Spicules: The Impact of Spicules on the Magnetic Chromosphere:
+https://arxiv.org/abs/0710.2934v2
+
+Short paper:
+https://www.researchgate.net/publication/283528553_MHD_WAVES_IN_A_STRATIFIED_VISCOUS_SOLAR_ATMOSPHERE

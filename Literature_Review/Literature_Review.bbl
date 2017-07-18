@@ -9,6 +9,9 @@
 {Aschwanden}, M.~J. 2005, {Physics of the Solar Corona. An Introduction with
   Problems and Solutions (2nd edition)}
 
+\bibitem[{{Athay} \& {Holzer}(1982)}]{Athay1982}
+{Athay}, R.~G., \& {Holzer}, T.~E. 1982, \apj, 255, 743
+
 \bibitem[{{Beckers}(1968)}]{Beckers1968}
 {Beckers}, J.~M. 1968, Solar Physic, 3, 367
 
@@ -29,16 +32,34 @@
   James}]{DePontieu2004}
 De~Pontieu, B., Erdelyi, R., \& James, S.~P. 2004, Nature, 430, 536
 
-\bibitem[{{De Pontieu} {et~al.}(2007){De Pontieu}, {McIntosh}, {Hansteen},
-  {Carlsson}, {Schrijver}, {Tarbell}, {Title}, {Shine}, {Suematsu}, {Tsuneta},
-  {Katsukawa}, {Ichimoto}, {Shimizu}, \& {Nagata}}]{Pontieu2007}
-{De Pontieu}, B., {McIntosh}, S., {Hansteen}, V.~H., {et~al.} 2007, \pasj, 59,
-  S655
+\bibitem[{{De Pontieu} {et~al.}(2007{\natexlab{a}}){De Pontieu}, {McIntosh},
+  {Hansteen}, {Carlsson}, {Schrijver}, {Tarbell}, {Title}, {Shine}, {Suematsu},
+  {Tsuneta}, {Katsukawa}, {Ichimoto}, {Shimizu}, \& {Nagata}}]{Pontieu2007}
+{De Pontieu}, B., {McIntosh}, S., {Hansteen}, V.~H., {et~al.}
+  2007{\natexlab{a}}, \pasj, 59, S655
+
+\bibitem[{{De Pontieu} {et~al.}(2007{\natexlab{b}}){De Pontieu}, {McIntosh},
+  {Hansteen}, {Carlsson}, {Schrijver}, {Tarbell}, {Title}, {Shine}, {Suematsu},
+  {Tsuneta}, {Katsukawa}, {Ichimoto}, {Shimizu}, \& {Nagata}}]{De_Pontieu2007}
+---. 2007{\natexlab{b}}, \pasj, 59, S655
+
+\bibitem[{{Gent} {et~al.}(2014){Gent}, {Fedun}, \& {Erd{\'e}lyi}}]{Gent_2014p2}
+{Gent}, F.~A., {Fedun}, V., \& {Erd{\'e}lyi}, R. 2014, \apj, 789, 42
+
+\bibitem[{{Gent} {et~al.}(2013){Gent}, {Fedun}, {Mumford}, \&
+  {Erd{\'e}lyi}}]{Gent_2013p1}
+{Gent}, F.~A., {Fedun}, V., {Mumford}, S.~J., \& {Erd{\'e}lyi}, R. 2013,
+  \mnras, 435, 689
 
 \bibitem[{Goedbloed \& Poedts(2004)}]{goedbloed2004principles}
 Goedbloed, J.~P., \& Poedts, S. 2004, Principles of magnetohydrodynamics: with
   applications to laboratory and astrophysical plasmas (Cambridge university
   press)
+
+\bibitem[{{Griffiths} {et~al.}(2013){Griffiths}, {Fedun}, {Mumford}, \&
+  {Gent}}]{Griffiths2013}
+{Griffiths}, M., {Fedun}, V., {Mumford}, S., \& {Gent}, F. 2013, {SAC:
+  Sheffield Advanced Code}, Astrophysics Source Code Library, , , ascl:1306.001
 
 \bibitem[{{Henriques} {et~al.}(2016){Henriques}, {Kuridze}, {Mathioudakis}, \&
   {Keenan}}]{Henriques2016}
@@ -61,8 +82,16 @@ Goedbloed, J.~P., \& Poedts, S. 2004, Principles of magnetohydrodynamics: with
 {Keppens}, R., {Meliani}, Z., {van Marle}, A.~J., {et~al.} 2012, Journal of
   Computational Physics, 231, 718
 
+\bibitem[{{Klimchuk}(2012)}]{Klimchuk2012}
+{Klimchuk}, J.~A. 2012, Journal of Geophysical Research (Space Physics), 117,
+  A12102
+
 \bibitem[{{Lang}(2006)}]{Lang_2006ses}
 {Lang}, K.~R. 2006, {Sun, Earth and Sky}
+
+\bibitem[{{McWhirter} {et~al.}(1975){McWhirter}, {Thonemann}, \&
+  {Wilson}}]{McWhirter1975}
+{McWhirter}, R.~W.~P., {Thonemann}, P.~C., \& {Wilson}, R. 1975, \aap, 40, 63
 
 \bibitem[{{Mullan}(2009)}]{mullan2009physics}
 {Mullan}, D. 2009, {Physics of the Sun: A First Course}, Pure and Applied
@@ -91,9 +120,17 @@ Priest, E. 2014, Magnetohydrodynamics of the Sun (Cambridge University Press)
 {Scullion}, E., {Erd{\'e}lyi}, R., {Fedun}, V., \& {Doyle}, J.~G. 2011, \apj,
   743, 14
 
+\bibitem[{{Vernazza} {et~al.}(1981){Vernazza}, {Avrett}, \&
+  {Loeser}}]{Vernazza1981}
+{Vernazza}, J.~E., {Avrett}, E.~H., \& {Loeser}, R. 1981, \apjs, 45, 635
+
 \bibitem[{{Verwichte} {et~al.}(2013){Verwichte}, {Van Doorsselaere}, {White},
   \& {Antolin}}]{Verwichte_2013A_A}
 {Verwichte}, E., {Van Doorsselaere}, T., {White}, R.~S., \& {Antolin}, P. 2013,
   \aap, 552, A138
+
+\bibitem[{{Zhang} {et~al.}(2012){Zhang}, {Shibata}, {Wang}, {Mao}, {Matsumoto},
+  {Liu}, \& {Su}}]{Zhang2012}
+{Zhang}, Y.~Z., {Shibata}, K., {Wang}, J.~X., {et~al.} 2012, \apj, 750, 16
 
 \end{thebibliography}

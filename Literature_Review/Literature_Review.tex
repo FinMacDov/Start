@@ -304,12 +304,13 @@ However, when gravitational stratification of the solar corona is included in th
 \caption{The evolution of the cross section of a flux tube is shown. The kink waves' transverse oscillations are known by the green arrows. The resonance between the kink wave and \Alfven wave produces an azimuthal resonance flow given by the purple arrows, this leads to KHI. Source: http:$//$hinode.nao.ac.jp$/$news$/$1508Hinode-IRIS$/$long.shtml. }
 \label{fig_14}
 \end{figure} 
+%Nice description here: https://perswww.kuleuven.be/~u0016541/MHD_sheets_pdf/thesisDelmont.pdf
 \subsection{MPI-AMRVAC}
-MPI-AMRVAC in a numerical code, developed in Fortran 90 parallezied with Message Passing Interface(MPI) \citep{Keppens2012}. The code aims to solve any systems of hyperbolic partial differential e.g. it handles anything of the following generic form: 
-\begin{equation}
-\frac{\partial \boldsymbol{U}}{\partial t} + \nabla \cdot \boldsymbol{F}(\boldsymbol{U}) = \boldsymbol{S}_{phys} (\boldsymbol{U}, \partial_{i} \boldsymbol{U}, \partial_i \partial_j \boldsymbol{U},\boldsymbol{x},t) .
+MPI-AMRVAC in a numerical code, developed in Fortran 90 parallezied with Message Passing Interface(MPI) \citep{Keppens2012}. The code aims to solve any systems of hyperbolic partial differential in conservative form as show: 
+\begin{equation}\label{AMRVAC_stlye}
+\frac{\partial \boldsymbol{U}}{\partial t} + \nabla \cdot \boldsymbol{F}(\boldsymbol{U}) = \boldsymbol{S}_{phys} (\boldsymbol{U}, \partial_{i} \boldsymbol{U}, \partial_i \partial_j \boldsymbol{U},\boldsymbol{x},t) ,
 \end{equation}
- by a using a number of different spatial and temporal numerical discretizations.
+where $U$ is the set of conserved variables, $F(U)$ the corresponding fluxes and $S_{phys}$ are the source terms. The source terms are used to add extra physics e.g. gravity, diffusion, viscosity, etc. If we are working with the ideal MHD equation with no gravity then $S_{phys} = $0 and we would have $U=(\rho, \boldsymbol{m}, e, \boldsymbol{B})$. \\ \\ MPI-AMRVAc is constructed to solve the conservation equations. However, it is possible to define your input of initial conditions in primitive form $U = (\rho, \boldsymbol{v}, p, \boldsymbol{B})$. If defined this manner the conservative quantities are calculated from the primitive input and then the systems of equations are solved spatially and temporally. The creators of this code took much care to make sure the conversion from primate to conservative (or vise versa) does not cause a lack of precision. \\ \\      
 %solves the MHD equations in the following form:
 %\begin{equation}
 %\frac{\partial \rho}{\partial t} + \nabla \cdot (\boldsymbol{v} \rho) = 0 ,
@@ -326,7 +327,14 @@ MPI-AMRVAC in a numerical code, developed in Fortran 90 parallezied with Message
 %\begin{equation}
 %p=(\gamma-1)(e- \frac{\rho \boldsymbol{v}^2-\boldsymbol{B}^2}{2}) .
 %\end{equation}
-The main focus of this software is on conservation laws in particular with shock dominated problems. AMRVAC has been constructed so it is a single versatile software with options and switches for various problems (e.g. HD, MHD, adiabatic, relativistic, choices in numerical solvers, ect) rather than developing a different method or version for each problem separately. The advantage of this approach is that it allows for a reduction of overall time for software development. One of the main reasons for using AMRVAC for carrying out numerical simulations of these jets is to deal with differences in the order of magnitude in length scales involved in this research.
+The main focus of this software is on conservation laws in particular with shock dominated problems. MPI-AMRVAC has been constructed so it is a single versatile software with options and switches for various problems rather than developing a different method or version for each problem separately. You have a selection of physics modules that come with he codes such as HD, MHD, SRHD, SRMHD and you can create your own physics model as long as the equation are of the form given by Eq. \eqref{AMRVAC_stlye}. There is a selection a numerical solver available for both temporal and spatial discretization. Once the solver and physics modules have been selected the user can write a user file. The contents of this file gives the initial inputs or acts on the evolving quantities during the simulation e.g. define a boundary condition that has continuous inflow. The advantage of this approach is that it allows for a reduction of overall time for software development. The advantage of using AMR is it allows us to increase resolution on areas of interest (i.e where smaller scale dynamics are occurring) without having to increase the resolution of the whole domain which would be computationally expensive. The reason why we are using MPI-AMRVAC for this project is to deal with the different length scales occurring in the simulation.
+\subsubsection{Adaptive Mesh Refienment}
+\begin{figure}
+\centering
+\includegraphics[width = \textwidth]{amrpng.png}
+\caption{A generic AMR block skeleton fom: https:$//$homes.esat.kuleuven.be$/$ $\sim$keppens/amrstructure.html}.
+\label{amr_scheme}
+\end{figure}   
 \subsubsection{Numerical Techniques}
 Solving differential equations are key part of understanding the physics occurring in nature. Often coupled systems of differential equations can not be solved analytically without making major assumption to simply the equation and thus removing important physics from the original problem. A classic example of a system of equations which isn't solvable analytically is the three body problem where using Newtonian mechanics you consider three masses interacting with one another through gravitational force. The numerical soultions to this problem allowed the revolution in modern space flights, and the launch of the two Voyager probes. By using numerical techniques on the MHD equations we gain an insight into systems which are too complex to obtain analytically.  \\ \\A differential is the gradient of a function over an infinitesimally small range. The numerical approximation takes this range and makes it finite, calculation the differential from an approximation dependent on the selected method. In the sub-sections I will summarise a selection of solvers used in the MPI-AMRVAC code that are applied in this thesis.
 \subsubsection{Finite Difference Method}

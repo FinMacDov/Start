@@ -18,46 +18,25 @@ logical, save :: firstinitglobal=.true.
 eqpar(gamma_)=5.0d0/3.0d0
 eqpar(eta_)=0.0d0 !this gives ideal MHD
 
-! normilastion in terms of CGS unit
-k_B=1.3806d-16    ! erg*K^-1
-miu0=4.d0*dpi     ! Gauss^2 cm^2 dyne^-1
-Lunit= 1.d8        ! cm = 1 Mm
-Lunit=1!.d9        ! cm = 10 Mm
-UNIT_LENGTH=Lunit
-Teunit=1.d6       ! K
-nHunit=1.d9       ! cm^-3
-mHunit=1.67262d-24 ! g
-runit= 1.4d0*mHunit*nHunit ! 2.341668000000000E-015 g*cm^-3=>[dyn cm^2 s^2] as erg=dyn cm = g·cm^2/s^2
-UNIT_DENSITY=runit
-punit=  2.3d0*nHunit*k_B*Teunit !10d8*(1/eqpar(gamma_))*runit ![g*cm^-3]  ! ! 0.317538000000000 erg*cm^-3
-Bunit= dsqrt(miu0*punit)      ! 1.99757357615242 Gauss
-vunit=  Bunit/dsqrt(miu0*runit) ! 1.16448846777562E007 cm/s = 116.45 km/s
-UNIT_VELOCITY=vunit
-tunit=Lunit/vunit ! 85.8746159942810 s
-heatunit=punit/tunit ! 3.697693390805347E-003 erg*cm^-3/s
-Ti = tunit
-
 ! normilastion in terms of SI unit
-k_B=1.3806d-16    ! erg*K^-1
-miu0=4.d0*dpi     ! Gauss^2 cm^2 dyne^-1
-Lunit= 1.d8        ! cm = 1 Mm
-Lunit=1!.d9        ! cm = 10 Mm
-UNIT_LENGTH=Lunit
-Teunit=1.d6       ! K
-nHunit=1.d9       ! cm^-3
-mHunit=1.67262d-24 ! g
-runit= 1.4d0*mHunit*nHunit ! 2.341668000000000E-015 g*cm^-3=>[dyn cm^2 s^2] as erg=dyn cm = g·cm^2/s^2
+k_B=1.3806d-23         ! J.K-1
+m_p = 1.672621777e-27  ! kg
+R_gas =k_B/m_p         ! J.k-1.kg-1 
+miu0=1.257d-6          ! H.m-1
+Lunit=1.d6             ! m
+UNIT_LENGTH=Lunit      ! m
+Teunit=1.d5            ! K
+nHunit=1.d15           ! m-3
+mHunit=1.67262d-27     ! kg
+runit= 1.4d0*mHunit*nHunit ! kg.m-3
 UNIT_DENSITY=runit
-punit=  2.3d0*nHunit*k_B*Teunit !10d8*(1/eqpar(gamma_))*runit ![g*cm^-3]  ! ! 0.317538000000000 erg*cm^-3
-Bunit= dsqrt(miu0*punit)      ! 1.99757357615242 Gauss
-vunit=  Bunit/dsqrt(miu0*runit) ! 1.16448846777562E007 cm/s = 116.45 km/s
+punit=  2.3d0*nHunit*k_B*Teunit ! m-3.J.K-1.K = m−1.kg.s−2 = pa
+Bunit= dsqrt(miu0*punit) ! sqrt(H.m-2.kg.s-2) = sqrt(kg2.s-4.A-2)= kg.A.s-2 = T  
+vunit=  Bunit/dsqrt(miu0*runit) ! m/s
 UNIT_VELOCITY=vunit
-tunit=Lunit/vunit ! 85.8746159942810 s
-heatunit=punit/tunit ! 3.697693390805347E-003 erg*cm^-3/s
-Ti = tunit
-
-
-
+tunit=Lunit/vunit ! s
+heatunit=punit/tunit ! m−1.kg.s−3 = pa.s-1
+Ti = tunit! s
 
 ! units for convert
 if(iprob==-1) then
@@ -72,16 +51,16 @@ normvar(pp_)     = UNIT_VELOCITY**2 * UNIT_DENSITY
 normt = UNIT_LENGTH/UNIT_VELOCITY
 
 eqpar(grav1_)=0.d0
-eqpar(grav2_)= -27542.29*Lunit/vunit**2 !where [Lunit/vunit**2] = [s^2/cm] 
+eqpar(grav2_)= -275.4229*Lunit/vunit**2 !where [Lunit/vunit**2] = [s^2/m] 
 
 dr=(xprobmax2-xprobmin2)/dble(jmax) ! step size
 !dr=(xprobmax2-xprobmin2)/(dble(jmax)-4)
 
 eqpar(BB1_)=0.d0 !Bx 
-eqpar(BB2_)=100.d0/Bunit !By
+eqpar(BB2_)=0.004/Bunit !By = 100G=0.01T, 40G=0.004T
 eqpar(BB3_)=0.d0 !Bz
 
-J_sp = 3.0d6/vunit !25 km s-1 (average speed of a spicule)
+J_sp = 1.5d4/vunit !25 km s-1 (average speed of a spicule)
 
 !this set up intail condtions
 if(firstinitglobal) then
@@ -96,15 +75,14 @@ subroutine inithdstatic
 include 'amrvacdef.f'
 
 real, dimension(jmax) :: rho, p, mu, Tem, z 
-integer :: i,ix,j,na
+integer :: i,ix,j,na,k
 double precision:: res
 !----------------------------------------------------------------------------
-
-open (unit = 1, file ="data_500.0/data_altp.dat", status='old')
-open (unit = 2, file ="data_500.0/data_altmu.dat", status='old')
-open (unit = 3, file ="data_500.0/data_altrho.dat", status='old')
-open (unit = 4, file ="data_500.0/data_altT.dat", status='old')
-open (unit = 5, file ="data_500.0/data_altZ.dat", status='old')
+open (unit = 1, file ="data_256.0/data_p.dat", status='old')
+open (unit = 2, file ="data_256.0/data_mu.dat", status='old')
+open (unit = 3, file ="data_256.0/data_rho.dat", status='old')
+open (unit = 4, file ="data_256.0/data_T.dat", status='old')
+open (unit = 5, file ="data_256.0/data_Z.dat", status='old')
 
 do i=1,jmax  
  read(1,*) p(i) !dyn/cm^2
@@ -114,22 +92,34 @@ do i=1,jmax
  read(5,*) Z(i) !Mm
 end do 
 
+!Need to covert CGS to SI and then make dimensionless
+
 do j=1,jmax
-   Temper(j)=Tem(j)/Teunit !dimensionless
-   rhoa(j)=rho(j)/runit !dimensionless
-   pa(j)=p(j)/punit ! !rhoa(j)*Temper(j) !dimensionless
-   mua(j) = mu(j)
-   ya(j) = Z(j)
+   Tea(j)=Tem(j)/Teunit 
+   rhoa(j)=rho(j)*1000.d0/runit 
+   pa(j)=0.1d0*p(j)/punit 
+   mua(j) = mu(j) ! This is already dimensionless. This mu is the average mol wieght 
+   ya(j) = Z(j)*1000000/Lunit
 enddo
+
+!equation ideal gas law (igl): p = R_gas*rho*T
+do k=1,jmax
+   pigl(k) = ((R_gas/mu(k))*rho(k)*Tem(k))/punit  
+enddo
+
+iniene = pigl(k-1)/(1-eqpar(gamma_))-(eqpar(BB1_)*eqpar(BB1_)+eqpar(BB2_)*eqpar(BB2_)+eqpar(BB3_)*eqpar(BB3_))/2
+print *, iniene
+
+!ya(j-1)*Lunit this gives last element of matrix
 
 J_d = rhoa(1) !jet density
 
 ! this creates txt file pruns with the output shown below
 if (mype==0) then
  open(123,file='output_test',form='formatted')
- write(123,*) jmax, '  ya(ix)              ','pa(ix)                   ','Temp(ix)                  ','rho(ix)                       ', 'mu(ix)           '
+ write(123,*) jmax, '  ya(ix)              ','pa(ix)                   ','pidgl              ','Temp(ix)                  ','rho(ix)                       ', 'mu(ix)           '
  do ix=1,jmax
-    write(123,*) ya(ix), pa(ix)*punit, Temper(ix), rhoa(ix)*runit, mua(ix) 
+    write(123,*) ya(ix), pa(ix)*punit, pigl(ix)*punit, Tea(ix)*Teunit, rhoa(ix)*runit, mua(ix) 
  enddo
  close(123)
 endif
@@ -149,10 +139,10 @@ include 'amrvacdef.f'
 
 integer, intent(in) :: ixG^L, ix^L
 integer :: ix^D,na,imode
-double precision:: res, lxsize, sigma, phase, mid_pt, eps
+double precision:: res, lxsize, sigma, phase, mid_pt, eps, dy
 double precision, intent(in) :: x(ixG^S,1:ndim)
 double precision, intent(inout) :: w(ixG^S,1:nw)
-double precision:: rinlet(ixG^T), r_jet(ixG^T)
+double precision:: rinlet(ixG^T), r_jet(ixG^T), p_bg(ixG^T)
 double precision:: psi(ixG^T)
 DOUBLE PRECISION :: jet_w, jet_h, jet_cx, jet_cy
 
@@ -166,13 +156,13 @@ if (first) then
    if (mype==0) then
       !print *, 'ixmin2:', ixmin2, 'ixmax2:', ixmax2
       print *,'2.5D MHD jet simulation'
-      print *, 'B0:', eqpar(BB2_)*Bunit, 'G'
+      print *, 'B0:', eqpar(BB2_)*Bunit, 'T'
       print *, 'Time unit:', Ti, ' s'
-      print *, 'normilised Va speed: ', vunit, ' cm s-1'
-      print *, 'Jet Speed is: ', J_sp*vunit, ' cm s-1'
-      print *, 'Jet rho is: ', J_d*runit, ' g cm^2/s^2'
-      print *, 'Rho0 = ', rhoa(1)*runit, 'g cm^2/s^2'
-      print *, 'Rhoz = ', rhoa(size(rhoa))*runit, 'g cm^2/s^2'
+      print *, 'normilised Va speed: ', vunit, ' m s-1'
+      print *, 'Jet Speed is: ', J_sp*vunit, ' m s-1'
+      print *, 'Jet rho is: ', J_d*runit, ' kg m^2/s^2'
+      print *, 'Rho0 = ', rhoa(1)*runit, 'g m^2/s^2'
+      print *, 'Rhoz = ', rhoa(size(rhoa))*runit, 'g m^2/s^2'
    end if
    first=.false.
 end if
@@ -185,6 +175,38 @@ eps = 0.05d0
 phase = 3.0d0
 sigma=0.02d0
 mid_pt = (xprobmax2-xprobmin2)/2 
+
+dy = -abs(ya(3)-ya(2))
+
+do ix2=ixmin2,ixmax2
+do ix1=ixmin1,ixmax1
+   na=floor(((x(ix1,ix2,2)-(xprobmin2))/dr)+1)
+   w(ix^D,rho_) = rhoa(na)
+   w(ix^D,rho_) = pa(na)
+end do
+end do
+
+patchw(ixG^S)=.false.
+call conserve(ixG^L,ix^L,w,x,patchw)
+w(ixmin1:ixmax1,ixmax2,e_)=iniene !-2004.2883700596335
+!print *, w(ix^S,e_)
+call primitive(ixG^L,ix^L,w,x)
+print *, w(ix^S,p_)
+
+do ix1=ixmin1,ixmax1 
+do ix2=ixmax2,ixmin2,-1
+! current issue is that I have not defined values in ghost cells so w(ixmin1:ixmax1,ixmax2+1,p_)=0
+!Need to fix this as giving bart simpson at the end of my plot
+   w(ix1,ix2,p_)=w(ix1,ix2+1,p_)+w(ix1,ix2,rho_)*dy*eqpar(grav2_)
+enddo
+enddo
+
+
+!do ix_2=ixGlo2,ixGhi2
+!do ix_1=ixGlo1+2,ixGhi1-2
+!   w(ix_1,ix_2,rho_)=-(1.D0/eqpar(grav1_))*(1.D0/(12.D0*(x(ix_1+1,ix_2,1)-x(ix_1,ix_2,1))))*(w(ix_1+2,ix_2,p_)-8.D0*w(ix_1+1,ix_2,p_)+8.D0*w(ix_1-1,ix_2,p_)-w(ix_1-2,ix_2,p_))
+!enddo
+!enddo
 
 !For FWHM 
 sigma = 0.2d0
@@ -202,10 +224,6 @@ do ix1=ixmin1,ixmax1
       w(ix^D,p_) = pa(na)!10.0d0*pa(1)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
       w(ix^D,v2_)  = (J_sp)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
       w(ix^D,tr1_) = 100.0d0
-   else
-      w(ix1,ix2,rho_)=rhoa(na)
-      w(ix1,ix2,p_)  =pa(na)
-      w(ix^D,tr1_) = 0.0d0
    endif
 end do
 end do
@@ -215,7 +233,7 @@ w(ix^S,b2_)  =eqpar(BB2_)
 w(ix^S,b3_)  =eqpar(BB3_)
 
 !ixGmin1:ixGmax1,ixGmin2:ixGmax2 !whole domian, including ghost cells
-!ixmin1,ixmax1,ixmin2,ixmax2 ! excludes ghoistys cells
+!ixmin1,ixmax1,ixmin2,ixmax2 ! excludes ghosts cells
 
 
 patchw(ixG^S)=.false.

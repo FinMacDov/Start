@@ -5,8 +5,8 @@
 
 
  &filelist
-        filenamelog='./output_500.0/jet'
-        filenameout='./output_500.0/jet_log'
+        filenamelog='./output_256.0_si/jet_si'
+        filenameout='./output_256.0_si/jet_log_si'
         primnames= 'rho v1 v2 v3 p b1 b2 b3 tr'
         saveprim=.true.
         autoconvert=.true.
@@ -63,8 +63,8 @@
  &amrlist
         !errorestimate=0
         mxnest = 3
-        nxlone1=10
-        nxlone2=500
+        nxlone1=50
+        nxlone2=250
         xprobmin1= -2.0d0
         xprobmax1= 2.0d0
         xprobmin2=0.0d0

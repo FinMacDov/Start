@@ -61,8 +61,8 @@
  /
 
  &amrlist
-        !errorestimate=0
-        mxnest = 3
+        errorestimate=0
+        mxnest = 1
         nxlone1=50
         nxlone2=250
         xprobmin1= -2.0d0

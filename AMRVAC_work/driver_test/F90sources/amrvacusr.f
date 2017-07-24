@@ -300,8 +300,8 @@ normt = UNIT_LENGTH/UNIT_VELOCITY
 eqpar(grav1_)=0.d0
 eqpar(grav2_)= -275.4229*Lunit/vunit**2 !where [Lunit/vunit**2] = [s2/m],[s2/m] 
 
-dr=(xprobmax2-xprobmin2)/dble(jmax) ! step size
-!dr=(xprobmax2-xprobmin2)/(dble(jmax)-4)
+!dr=(xprobmax2-xprobmin2)/dble(jmax) ! step size
+dr=(xprobmax2-xprobmin2)/dble(jmax-6) ! step size
 
 eqpar(BB1_)=0.d0 !Bx 
 eqpar(BB2_)=0.004/Bunit !By = 100G=0.01T, 40G=0.004T
@@ -354,9 +354,9 @@ do k=1,jmax
    pigl(k) = ((R_gas/mu(k))*rho(k)*Tem(k))/punit  
 enddo
 
-iniene = pigl(k-1)/(1-eqpar(gamma_))-(eqpar(BB1_)*eqpar(BB1_)&
+iniene = pigl((k-1)-2)/(1-eqpar(gamma_))-(eqpar(BB1_)*eqpar(BB1_)&
    +eqpar(BB2_)*eqpar(BB2_)+eqpar(BB3_)*eqpar(BB3_))/2
-print *, iniene
+!print *, pigl(k-3)*punit
 
 !ya(j-1)*Lunit this gives last element of matrix
 
@@ -391,16 +391,16 @@ include 'amrvacdef.f'
 
 integer, intent(in) :: ixGmin1,ixGmin2,ixGmax1,ixGmax2, ixmin1,ixmin2,ixmax1,&
    ixmax2
-integer :: ix1,ix2,na,imode
+integer :: ix1,ix2,na,imode, jx
 double precision:: res, lxsize, sigma, phase, mid_pt, eps, dy
 double precision, intent(in) :: x(ixGmin1:ixGmax1,ixGmin2:ixGmax2,1:ndim)
 double precision, intent(inout) :: w(ixGmin1:ixGmax1,ixGmin2:ixGmax2,1:nw)
 double precision:: rinlet(ixGlo1:ixGhi1,ixGlo2:ixGhi2), r_jet(ixGlo1:ixGhi1,&
    ixGlo2:ixGhi2), p_bg(ixGlo1:ixGhi1,ixGlo2:ixGhi2)
 double precision:: psi(ixGlo1:ixGhi1,ixGlo2:ixGhi2)
-DOUBLE PRECISION :: jet_w, jet_h, jet_cx, jet_cy
+double precision :: jet_w, jet_h, jet_cx, jet_cy
 
-logical, save:: first=.true.
+logical, save:: first=.true., first_1=.true. 
 logical patchw(ixGlo1:ixGhi1,ixGlo2:ixGhi2)
 !-----------------------------------------------------------------------------
 
@@ -432,22 +432,30 @@ mid_pt = (xprobmax2-xprobmin2)/2
 
 dy = -abs(ya(3)-ya(2))
 
+!NOTE if you change the number of ghost cells remember to change dr also. I should make a common var for this!!!!
 do ix2=ixmin2,ixmax2
 do ix1=ixmin1,ixmax1
-   na=floor(((x(ix1,ix2,2)-(xprobmin2))/dr)+1)
+   na=floor(((x(ix1,ix2,2)-(xprobmin2))/dr)+1+3) !(1)+3 as the they are ghost cells 
    w(ix1,ix2,rho_) = rhoa(na)
-   w(ix1,ix2,rho_) = pa(na)
+! Useful checks to make sure correct values are taken from arrays
+!   if (mype==0 .and. first_1) then
+!      print *, 'check start value', na, w(ix^D,rho_)*runit, x(ix1,ix2,2)
+!   endif
+!   first_1=.false.
+!   if (mype==7 .and. ix2 == ixmax2 .and. ix1 == ixmax1) then
+!   print *, 'check last value', na , w(ix^D,rho_)*runit, x(ix1,ix2,2)
+!   endif
 end do
 end do
 
 patchw(ixGmin1:ixGmax1,ixGmin2:ixGmax2)=.false.
 call conserve(ixGmin1,ixGmin2,ixGmax1,ixGmax2,ixmin1,ixmin2,ixmax1,ixmax2,w,x,&
    patchw)
-w(ixmin1:ixmax1,ixmax2,e_)=iniene !-2004.2883700596335
+w(ixmin1:ixmax1,ixmax2+1,e_)=iniene !-2004.2883700596335
 !print *, w(ix^S,e_)
 call primitive(ixGmin1,ixGmin2,ixGmax1,ixGmax2,ixmin1,ixmin2,ixmax1,ixmax2,w,&
    x)
-print *, w(ixmin1:ixmax1,ixmin2:ixmax2,p_)
+!print *, w(ix^S,p_)
 
 do ix1=ixmin1,ixmax1 
 do ix2=ixmax2,ixmin2,-1
@@ -464,6 +472,8 @@ enddo
 !enddo
 !enddo
 
+
+!!This is where we add the jet
 !For FWHM 
 sigma = 0.2d0
 jet_w = 0.2d0
@@ -473,18 +483,19 @@ jet_cy = (jet_h-0.0d0)/2.0d0 !center pts y
 r_jet(ixmin1:ixmax1,ixmin2:ixmax2) = (x(ixmin1:ixmax1,ixmin2:ixmax2,1)&
    -jet_cx)**2+(x(ixmin1:ixmax1,ixmin2:ixmax2,2)-jet_cy)**2  
 
-do ix2=ixmin2,ixmax2
-do ix1=ixmin1,ixmax1
-   na=floor(((x(ix1,ix2,2)-(xprobmin2))/dr)+1)
-   if (x(ix1,ix2,2).le. jet_h .and. x(ix1,ix2,1).le.jet_w/2.0d0 &
-      .and. x(ix1,ix2,1).ge.-jet_w/2.0d0) then
-      w(ix1,ix2,rho_) = rhoa(na)
-      w(ix1,ix2,p_) = pa(na)!10.0d0*pa(1)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
-      w(ix1,ix2,v2_)  = (J_sp)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
-      w(ix1,ix2,tr1_) = 100.0d0
-   endif
-end do
-end do
+!do ix2=ixmin2,ixmax2
+!do ix1=ixmin1,ixmax1
+!   na=floor(((x(ix1,ix2,2)-(xprobmin2))/dr)+1)
+!   if (x(ix^D,2).le. jet_h .and. x(ix^D,1).le.jet_w/2.0d0 .and. x(ix^D,1).ge.-jet_w/2.0d0) then
+!      w(ix^D,rho_) = rhoa(na)
+!      w(ix^D,p_) = pa(na)!10.0d0*pa(1)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
+!      w(ix^D,v2_)  = (J_sp)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
+!      w(ix^D,tr1_) = 100.0d0
+!   endif
+!end do
+!end do
+
+
 
 w(ixmin1:ixmax1,ixmin2:ixmax2,b1_)  =eqpar(BB1_)
 w(ixmin1:ixmax1,ixmin2:ixmax2,b2_)  =eqpar(BB2_)

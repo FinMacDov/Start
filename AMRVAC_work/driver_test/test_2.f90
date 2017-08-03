@@ -107,8 +107,7 @@ do k=1,jmax
    pigl(k) = ((R_gas/mu(k))*rho(k)*Tem(k))/punit
 enddo
 
-!k = jmax
-iniene = pigl((k-1)-2)/(eqpar(gamma_)-1.0d0)-(eqpar(BB1_)*eqpar(BB1_)+eqpar(BB2_)*eqpar(BB2_)+eqpar(BB3_)*eqpar(BB3_))/2.0d0
+iniene = pigl((k-1)-2)/(1-eqpar(gamma_))-(eqpar(BB1_)*eqpar(BB1_)+eqpar(BB2_)*eqpar(BB2_)+eqpar(BB3_)*eqpar(BB3_))/2
 !print *, pigl(k-3)*punit
 
 !ya(j-1)*Lunit this gives last element of matrix
@@ -175,17 +174,16 @@ w(ix^S,v3_)=0.d0
 eps = 0.05d0
 phase = 3.0d0
 sigma=0.02d0
-mid_pt = (xprobmax2-xprobmin2)/2.0d0
+mid_pt = (xprobmax2-xprobmin2)/2
 
-dy = -abs(ya(3)-ya(2)) !distance between 2 pts is const thro out the array
+dy = -abs(ya(3)-ya(2))
 
-!NOTE if you change the number of mxnest remember to change dr also.
-!I should make a common var for this!!!!
+!NOTE if you change the number of ghost cells remember to change dr also. I should make a common var for this!!!!
 do ix2=ixmin2,ixmax2
 do ix1=ixmin1,ixmax1
-   na=floor(((x(ix1,ix2,2)-(xprobmin2))/dr)+1.0d0+3.0d0) !(1)+3 for ghost cells
+   na=floor(((x(ix1,ix2,2)-(xprobmin2))/dr)+1+3) !(1)+3 as the they are ghost cells
    w(ix^D,rho_) = rhoa(na)
-!! Useful checks to make sure correct values are taken from arrays
+! Useful checks to make sure correct values are taken from arrays
 !   if (mype==0 .and. first_1) then
 !      print *, 'check start value', na, w(ix^D,rho_)*runit, x(ix1,ix2,2)
 !   endif
@@ -198,13 +196,15 @@ end do
 
 patchw(ixG^S)=.false.
 call conserve(ixG^L,ix^L,w,x,patchw)
-w(ixmin1:ixmax1,ixmax2+1,e_)=iniene
+w(ixmin1:ixmax1,ixmax2+1,e_)=iniene !-2004.2883700596335
 !print *, w(ix^S,e_)
 call primitive(ixG^L,ix^L,w,x)
 !print *, w(ix^S,p_)
 
 do ix1=ixmin1,ixmax1
 do ix2=ixmax2,ixmin2,-1
+! current issue is that I have not defined values in ghost cells so w(ixmin1:ixmax1,ixmax2+1,p_)=0
+!Need to fix this as giving bart simpson at the end of my plot
    w(ix1,ix2,p_)=w(ix1,ix2+1,p_)+w(ix1,ix2,rho_)*dy*eqpar(grav2_)
 enddo
 enddo

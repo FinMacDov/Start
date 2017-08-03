@@ -264,7 +264,7 @@ eqpar(eta_)=0.0d0 !this gives ideal MHD
 ! normilastion in terms of SI unit
 k_B=1.3806d-23         ! J.K-1
 m_p = 1.672621777e-27  ! kg
-R_gas =k_B/m_p         ! J.k-1.kg-1 
+R_gas =k_B/m_p         ! J.k-1.kg-1
 miu0=1.257d-6          ! H.m-1
 Lunit=1.d6             ! m
 UNIT_LENGTH=Lunit      ! m
@@ -274,7 +274,7 @@ mHunit=1.67262d-27     ! kg
 runit= 1.4d0*mHunit*nHunit ! kg.m-3
 UNIT_DENSITY=runit
 punit=  2.3d0*nHunit*k_B*Teunit ! m-3.J.K-1.K = mb1.kg.sb2 = pa
-Bunit= dsqrt(miu0*punit) !sqrt(H.m-2.kg.s-2) = sqrt(kg2.s-4.A-2)= kg.A.s-2 = T  
+Bunit= dsqrt(miu0*punit) !sqrt(H.m-2.kg.s-2) = sqrt(kg2.s-4.A-2)= kg.A.s-2 = T
 vunit=  Bunit/dsqrt(miu0*runit) ! m/s
 UNIT_VELOCITY=vunit
 tunit=Lunit/vunit ! s
@@ -283,7 +283,7 @@ Ti = tunit! s
 
 ! units for convert
 if(iprob==-1) then
-  normvar(0) = one 
+  normvar(0) = one
 else
   normvar(0) = UNIT_LENGTH
 endif
@@ -298,12 +298,12 @@ normvar(b3_)   = dsqrt(4.0d0*dpi*normvar(pp_))
 normt = UNIT_LENGTH/UNIT_VELOCITY
 
 eqpar(grav1_)=0.d0
-eqpar(grav2_)= -275.4229*Lunit/vunit**2 !where [Lunit/vunit**2] = [s2/m],[s2/m] 
+eqpar(grav2_)= -275.4229*Lunit/vunit**2 !where [Lunit/vunit**2] = [s2/m],[s2/m]
 
 !dr=(xprobmax2-xprobmin2)/dble(jmax) ! step size
 dr=(xprobmax2-xprobmin2)/dble(jmax-6) ! step size
 
-eqpar(BB1_)=0.d0 !Bx 
+eqpar(BB1_)=0.d0 !Bx
 eqpar(BB2_)=0.004/Bunit !By = 100G=0.01T, 40G=0.004T
 eqpar(BB3_)=0.d0 !Bz
 
@@ -321,7 +321,7 @@ subroutine inithdstatic
 !! initialize the table in a vertical line through the global domain
 include 'amrvacdef.f'
 
-real, dimension(jmax) :: rho, p, mu, Tem, z 
+real, dimension(jmax) :: rho, p, mu, Tem, z
 integer :: i,ix,j,na,k
 double precision:: res
 !----------------------------------------------------------------------------
@@ -331,31 +331,32 @@ open (unit = 3, file ="data_256.0/data_rho.dat", status='old')
 open (unit = 4, file ="data_256.0/data_T.dat", status='old')
 open (unit = 5, file ="data_256.0/data_Z.dat", status='old')
 
-do i=1,jmax  
+do i=1,jmax
  read(1,*) p(i) !dyn/cm2,!dyn/cm2
  read(2,*) mu(i) !dimension mean molecular weight
  read(3,*) rho(i) !g/cm3,!g/cm3
  read(4,*) Tem(i) !k
  read(5,*) Z(i) !Mm
-end do 
+end do
 
 !Need to covert CGS to SI and then make dimensionless
 
 do j=1,jmax
-   Tea(j)=Tem(j)/Teunit 
-   rhoa(j)=rho(j)*1000.d0/runit 
-   pa(j)=0.1d0*p(j)/punit 
-   mua(j) = mu(j) !This is already dimensionless. This mu is the average mol wieght 
+   Tea(j)=Tem(j)/Teunit
+   rhoa(j)=rho(j)*1000.d0/runit
+   pa(j)=0.1d0*p(j)/punit
+   mua(j) = mu(j) !This is already dimensionless. This mu is the average mol wieght
    ya(j) = Z(j)*1000000/Lunit
 enddo
 
 !equation ideal gas law (igl): p = R_gas*rho*T
 do k=1,jmax
-   pigl(k) = ((R_gas/mu(k))*rho(k)*Tem(k))/punit  
+   pigl(k) = ((R_gas/mu(k))*rho(k)*Tem(k))/punit
 enddo
 
-iniene = pigl((k-1)-2)/(1-eqpar(gamma_))-(eqpar(BB1_)*eqpar(BB1_)&
-   +eqpar(BB2_)*eqpar(BB2_)+eqpar(BB3_)*eqpar(BB3_))/2
+!k = jmax
+iniene = pigl((k-1)-2)/(eqpar(gamma_)-1.0d0)-(eqpar(BB1_)*eqpar(BB1_)&
+   +eqpar(BB2_)*eqpar(BB2_)+eqpar(BB3_)*eqpar(BB3_))/2.0d0
 !print *, pigl(k-3)*punit
 
 !ya(j-1)*Lunit this gives last element of matrix
@@ -370,7 +371,7 @@ if (mype==0) then
     'rho(ix)                       ', 'mu(ix)           '
  do ix=1,jmax
     write(123,*) ya(ix), pa(ix)*punit, pigl(ix)*punit, Tea(ix)&
-       *Teunit, rhoa(ix)*runit, mua(ix) 
+       *Teunit, rhoa(ix)*runit, mua(ix)
  enddo
  close(123)
 endif
@@ -400,7 +401,7 @@ double precision:: rinlet(ixGlo1:ixGhi1,ixGlo2:ixGhi2), r_jet(ixGlo1:ixGhi1,&
 double precision:: psi(ixGlo1:ixGhi1,ixGlo2:ixGhi2)
 double precision :: jet_w, jet_h, jet_cx, jet_cy
 
-logical, save:: first=.true., first_1=.true. 
+logical, save:: first=.true., first_1=.true.
 logical patchw(ixGlo1:ixGhi1,ixGlo2:ixGhi2)
 !-----------------------------------------------------------------------------
 
@@ -428,16 +429,17 @@ w(ixmin1:ixmax1,ixmin2:ixmax2,v3_)=0.d0
 eps = 0.05d0
 phase = 3.0d0
 sigma=0.02d0
-mid_pt = (xprobmax2-xprobmin2)/2 
+mid_pt = (xprobmax2-xprobmin2)/2.0d0
 
-dy = -abs(ya(3)-ya(2))
+dy = -abs(ya(3)-ya(2)) !distance between 2 pts is const thro out the array
 
-!NOTE if you change the number of ghost cells remember to change dr also. I should make a common var for this!!!!
+!NOTE if you change the number of mxnest remember to change dr also.
+!I should make a common var for this!!!!
 do ix2=ixmin2,ixmax2
 do ix1=ixmin1,ixmax1
-   na=floor(((x(ix1,ix2,2)-(xprobmin2))/dr)+1+3) !(1)+3 as the they are ghost cells 
+   na=floor(((x(ix1,ix2,2)-(xprobmin2))/dr)+1.0d0+3.0d0) !(1)+3 for ghost cells
    w(ix1,ix2,rho_) = rhoa(na)
-! Useful checks to make sure correct values are taken from arrays
+!! Useful checks to make sure correct values are taken from arrays
 !   if (mype==0 .and. first_1) then
 !      print *, 'check start value', na, w(ix^D,rho_)*runit, x(ix1,ix2,2)
 !   endif
@@ -457,7 +459,7 @@ call primitive(ixGmin1,ixGmin2,ixGmax1,ixGmax2,ixmin1,ixmin2,ixmax1,ixmax2,w,&
    x)
 !print *, w(ix^S,p_)
 
-do ix1=ixmin1,ixmax1 
+do ix1=ixmin1,ixmax1
 do ix2=ixmax2,ixmin2,-1
 ! current issue is that I have not defined values in ghost cells so w(ixmin1:ixmax1,ixmax2+1,p_)=0
 !Need to fix this as giving bart simpson at the end of my plot
@@ -474,14 +476,14 @@ enddo
 
 
 !!This is where we add the jet
-!For FWHM 
+!For FWHM
 sigma = 0.2d0
 jet_w = 0.2d0
 jet_h = 0.05d0
 jet_cx = (jet_w-jet_w)/2.0d0 !center pts x
 jet_cy = (jet_h-0.0d0)/2.0d0 !center pts y
 r_jet(ixmin1:ixmax1,ixmin2:ixmax2) = (x(ixmin1:ixmax1,ixmin2:ixmax2,1)&
-   -jet_cx)**2+(x(ixmin1:ixmax1,ixmin2:ixmax2,2)-jet_cy)**2  
+   -jet_cx)**2+(x(ixmin1:ixmax1,ixmin2:ixmax2,2)-jet_cy)**2
 
 !do ix2=ixmin2,ixmax2
 !do ix1=ixmin1,ixmax1
@@ -536,14 +538,14 @@ case(3)
 !-------------------------------
 ! This creates cont condition for special BC
 !-------------------------------
-   
+
    !yrange
    ixImin1=ixGmin1 != 1
-   ixImax1=ixGmin1-1+dixB !=3 
+   ixImax1=ixGmin1-1+dixB !=3
    !xrange
    ixImin2=ixGmin2 !=1
    ixImax2=ixGmax2 !=16
- 
+
    ixIntmin1=ixOmin1;ixIntmin2=ixOmin2;ixIntmax1=ixOmax1;ixIntmax2=ixOmax2;
    ixIntmin2=ixOmin2;ixIntmax2=ixOmax2+1;
 !   ixIntmin2=ixOmin2-1+dixB;ixIntmax2=ixOmax2+1;
@@ -580,10 +582,10 @@ subroutine bc_int(level,qt,ixImin1,ixImin2,ixImax1,ixImax2,ixOmin1,ixOmin2,&
 
 ! internal boundary, user defined
 !
-! This subroutine can be used to artificially overwrite ALL conservative 
+! This subroutine can be used to artificially overwrite ALL conservative
 ! variables in a user-selected region of the mesh, and thereby act as
 ! an internal boundary region. It is called just before external (ghost cell)
-! boundary regions will be set by the BC selection. Here, you could e.g. 
+! boundary regions will be set by the BC selection. Here, you could e.g.
 ! want to introduce an extra variable (nwextra, to be distinguished from nwaux)
 ! which can be used to identify the internal boundary region location.
 ! Its effect should always be local as it acts on the mesh.

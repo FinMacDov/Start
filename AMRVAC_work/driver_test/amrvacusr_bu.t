@@ -39,7 +39,7 @@ Ti = tunit
 
 ! units for convert
 if(iprob==-1) then
-  normvar(0) = one 
+  normvar(0) = one
 else
   normvar(0) = UNIT_LENGTH
 endif
@@ -50,12 +50,12 @@ normvar(pp_)     = UNIT_VELOCITY**2 * UNIT_DENSITY
 normt = UNIT_LENGTH/UNIT_VELOCITY
 
 eqpar(grav1_)=0.d0
-eqpar(grav2_)= -27542.29*Lunit/vunit**2 !where [Lunit/vunit**2] = [s^2/cm] 
+eqpar(grav2_)= -27542.29*Lunit/vunit**2 !where [Lunit/vunit**2] = [s^2/cm]
 
 dr=(xprobmax2-xprobmin2)/dble(jmax) ! step size
 !dr=(xprobmax2-xprobmin2)/(dble(jmax)-4)
 
-eqpar(BB1_)=0.d0 !Bx 
+eqpar(BB1_)=0.d0 !Bx
 eqpar(BB2_)=100.d0/Bunit !By
 eqpar(BB3_)=0.d0 !Bz
 
@@ -73,7 +73,7 @@ subroutine inithdstatic
 !! initialize the table in a vertical line through the global domain
 include 'amrvacdef.f'
 
-real, dimension(jmax) :: rho, p, mu, Tem, z 
+real, dimension(jmax) :: rho, p, mu, Tem, z
 integer :: i,ix,j,na
 double precision:: res
 !----------------------------------------------------------------------------
@@ -84,13 +84,13 @@ open (unit = 3, file ="data_500.0/data_altrho.dat", status='old')
 open (unit = 4, file ="data_500.0/data_altT.dat", status='old')
 open (unit = 5, file ="data_500.0/data_altZ.dat", status='old')
 
-do i=1,jmax  
+do i=1,jmax
  read(1,*) p(i) !dyn/cm^2
  read(2,*) mu(i) !dimension mean molecular weight
  read(3,*) rho(i) !g/cm^3
  read(4,*) Tem(i) !k
  read(5,*) Z(i) !Mm
-end do 
+end do
 
 do j=1,jmax
    Temper(j)=Tem(j)/Teunit !dimensionless
@@ -107,7 +107,7 @@ if (mype==0) then
  open(123,file='output_test',form='formatted')
  write(123,*) jmax, '  ya(ix)              ','pa(ix)                   ','Temp(ix)                  ','rho(ix)                       ', 'mu(ix)           '
  do ix=1,jmax
-    write(123,*) ya(ix), pa(ix)*punit, Temper(ix), rhoa(ix)*runit, mua(ix) 
+    write(123,*) ya(ix), pa(ix)*punit, Temper(ix), rhoa(ix)*runit, mua(ix)
  enddo
  close(123)
 endif
@@ -162,15 +162,15 @@ w(ix^S,v3_)=0.d0
 eps = 0.05d0
 phase = 3.0d0
 sigma=0.02d0
-mid_pt = (xprobmax2-xprobmin2)/2 
+mid_pt = (xprobmax2-xprobmin2)/2
 
-!For FWHM 
+!For FWHM
 sigma = 0.2d0
 jet_w = 0.2d0
 jet_h = 0.05d0
 jet_cx = (jet_w-jet_w)/2.0d0 !center pts x
 jet_cy = (jet_h-0.0d0)/2.0d0 !center pts y
-r_jet(ix^S) = (x(ix^S,1)-jet_cx)**2+(x(ix^S,2)-jet_cy)**2  
+r_jet(ix^S) = (x(ix^S,1)-jet_cx)**2+(x(ix^S,2)-jet_cy)**2
 
 do ix2=ixmin2,ixmax2
 do ix1=ixmin1,ixmax1
@@ -223,14 +223,14 @@ case(3)
 !-------------------------------
 ! This creates cont condition for special BC
 !-------------------------------
-   
+
    !yrange
    ixImin1=ixGmin1 != 1
-   ixImax1=ixGmin1-1+dixB !=3 
+   ixImax1=ixGmin1-1+dixB !=3
    !xrange
    ixImin2=ixGmin2 !=1
    ixImax2=ixGmax2 !=16
- 
+
    ixInt^L=ixO^L;
    ixIntmin2=ixOmin2;ixIntmax2=ixOmax2+1;
 !   ixIntmin2=ixOmin2-1+dixB;ixIntmax2=ixOmax2+1;
@@ -261,10 +261,10 @@ subroutine bc_int(level,qt,ixI^L,ixO^L,w,x)
 
 ! internal boundary, user defined
 !
-! This subroutine can be used to artificially overwrite ALL conservative 
+! This subroutine can be used to artificially overwrite ALL conservative
 ! variables in a user-selected region of the mesh, and thereby act as
 ! an internal boundary region. It is called just before external (ghost cell)
-! boundary regions will be set by the BC selection. Here, you could e.g. 
+! boundary regions will be set by the BC selection. Here, you could e.g.
 ! want to introduce an extra variable (nwextra, to be distinguished from nwaux)
 ! which can be used to identify the internal boundary region location.
 ! Its effect should always be local as it acts on the mesh.

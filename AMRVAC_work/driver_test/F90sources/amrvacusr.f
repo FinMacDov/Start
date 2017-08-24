@@ -453,7 +453,7 @@ end do
 patchw(ixGmin1:ixGmax1,ixGmin2:ixGmax2)=.false.
 call conserve(ixGmin1,ixGmin2,ixGmax1,ixGmax2,ixmin1,ixmin2,ixmax1,ixmax2,w,x,&
    patchw)
-w(ixmin1:ixmax1,ixmax2+1,e_)=iniene !-2004.2883700596335
+w(ixmin1:ixmax1,ixmax2+1,e_)=iniene
 !print *, w(ix^S,e_)
 call primitive(ixGmin1,ixGmin2,ixGmax1,ixGmax2,ixmin1,ixmin2,ixmax1,ixmax2,w,&
    x)
@@ -461,11 +461,26 @@ call primitive(ixGmin1,ixGmin2,ixGmax1,ixGmax2,ixmin1,ixmin2,ixmax1,ixmax2,w,&
 
 do ix1=ixmin1,ixmax1
 do ix2=ixmax2,ixmin2,-1
-! current issue is that I have not defined values in ghost cells so w(ixmin1:ixmax1,ixmax2+1,p_)=0
-!Need to fix this as giving bart simpson at the end of my plot
    w(ix1,ix2,p_)=w(ix1,ix2+1,p_)+w(ix1,ix2,rho_)*dy*eqpar(grav2_)
 enddo
 enddo
+
+
+!do ix2=ixmin2,ixmax2
+!do ix1=ixmin1+2,ixmax1-2
+!   w(ix^D,rho_) = -(1/eqpar(grav2_))*(1.d0/(12.d0*(x(ix1+1,ix2,1)-x(ix1,ix2,1))))*(w(ix1+2,ix2,p_) &
+!                   -8.D0*w(ix1+1,ix2,p_)+8.D0*w(ix1-1,ix2,p_)-w(ix1-2,ix2,p_))
+!end do
+!end do
+
+do ix1=ixmin1,ixmax1
+do ix2=ixmin2+2,ixmax2-2
+   w(ix1,ix2,rho_) = (1/eqpar(grav2_))*(1.d0/(12.d0*(x(ix1,ix2&
+      +1,2)-x(ix1,ix2,2))))*(w(ix1,ix2+2,p_) -8.D0*w(ix1,ix2+1,p_)&
+      +8.D0*w(ix1,ix2-1,p_)-w(ix1,ix2-2,p_))
+end do
+end do
+
 
 
 !do ix_2=ixGlo2,ixGhi2

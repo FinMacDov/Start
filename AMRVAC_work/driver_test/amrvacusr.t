@@ -37,7 +37,7 @@ UNIT_VELOCITY=vunit
 tunit=Lunit/vunit ! s
 heatunit=punit/tunit ! m−1.kg.s−3 = pa.s-1
 Ti = tunit! s
-
+print *, 
 ! units for convert
 if(iprob==-1) then
   normvar(0) = one
@@ -199,6 +199,7 @@ end do
 patchw(ixG^S)=.false.
 call conserve(ixG^L,ix^L,w,x,patchw)
 w(ixmin1:ixmax1,ixmax2+1,e_)=iniene
+w(ixmin1:ixmax1,ixmax2,m1_)=
 !print *, w(ix^S,e_)
 call primitive(ixG^L,ix^L,w,x)
 !print *, w(ix^S,p_)
@@ -208,6 +209,22 @@ do ix2=ixmax2,ixmin2,-1
    w(ix1,ix2,p_)=w(ix1,ix2+1,p_)+w(ix1,ix2,rho_)*dy*eqpar(grav2_)
 enddo
 enddo
+
+
+!do ix2=ixmin2,ixmax2
+!do ix1=ixmin1+2,ixmax1-2
+!   w(ix^D,rho_) = -(1/eqpar(grav2_))*(1.d0/(12.d0*(x(ix1+1,ix2,1)-x(ix1,ix2,1))))*(w(ix1+2,ix2,p_) &
+!                   -8.D0*w(ix1+1,ix2,p_)+8.D0*w(ix1-1,ix2,p_)-w(ix1-2,ix2,p_))
+!end do
+!end do
+
+do ix1=ixmin1,ixmax1
+do ix2=ixmin2+2,ixmax2-2
+   w(ix^D,rho_) = -(1/eqpar(grav2_))*(1.d0/(12.d0*(x(ix1,ix2+1,2)-x(ix1,ix2,2))))*(w(ix1,ix2+2,p_) &
+                   -8.D0*w(ix1,ix2+1,p_)+8.D0*w(ix1,ix2-1,p_)-w(ix1,ix2-2,p_))
+end do
+end do
+
 
 
 !do ix_2=ixGlo2,ixGhi2

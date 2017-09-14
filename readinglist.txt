@@ -46,3 +46,9 @@ https://arxiv.org/abs/0710.2934v2
 
 Short paper:
 https://www.researchgate.net/publication/283528553_MHD_WAVES_IN_A_STRATIFIED_VISCOUS_SOLAR_ATMOSPHERE
+
+AMR for HD shocks:
+https://crd.lbl.gov/assets/pubs_presos/AMCS/ANAG/A113.pdf
+
+Computional MHD Course Notes:
+http://www-personal.umich.edu/~gtoth/Teach/porto_course.pdf

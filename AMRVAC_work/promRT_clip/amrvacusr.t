@@ -414,7 +414,7 @@ case(3)
    !!This is where we add the jet
    !For FWHM
    sigma = 0.2d0
-   jet_w = 0.05d0
+   jet_w = 1.0d-2!!NOTE:(xprobmax1-xprobmax2)/nxlone1
    jet_h = 0.05d0
    jet_cx = (jet_w-jet_w)/2.0d0 !center pts x
    jet_cy = (jet_h-0.0d0)/2.0d0 !center pts y
@@ -423,9 +423,9 @@ case(3)
    do ix2=ixOmin2,ixOmax2
    do ix1=ixOmin1,ixOmax1
       if (x(ix^D,2).le. jet_h .and. x(ix^D,1).le.jet_w/2.0d0 .and. x(ix^D,1).ge.-jet_w/2.0d0) then
-         w(ix^D,rho_) = ra(1)
+         !w(ix^D,rho_) = ra(1)
          !w(ixO^D,p_) = pa(1)!10.0d0*pa(1)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
-         w(ix^D,v2_)  = (2.0d6/vunit)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
+         w(ix^D,v2_)  = (8.0d6/vunit)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
          w(ix^D,tr1_) = 100.0d0
       endif
    end do

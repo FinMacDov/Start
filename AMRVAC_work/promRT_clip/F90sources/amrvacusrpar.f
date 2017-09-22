@@ -19,7 +19,7 @@ double precision :: SRadius,dr,gzone,rho0,Tch,Tco,bsca,htra1,htra2,htra3,&
 DOUBLE PRECISION:: randphase(1000)
 ! end include amrvacusrpar - promRTideal
 !##############################################################################
+COMMON /DOUB/ randphase
 COMMON /doub/ pa,ra,ya,raext,paext,Lunit,Teunit,nHunit,runit,Bunit,mHunit,k_B,&
    miu0,vunit,tunit,punit,heatunit,SRadius,dr,gzone,rho0,Tch,Tco,bsca,htra1,&
    htra2,htra3, ybot,ytop,Tpromax,Tpromin,pwidth,Tcoext
-COMMON /DOUB/ randphase

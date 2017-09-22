@@ -308,7 +308,9 @@ double precision, intent(inout) :: w(ixGmin1:ixGmax1,ixGmin2:ixGmax2,1:nw)
 double precision:: psi(ixGlo1:ixGhi1,ixGlo2:ixGhi2),tmp(ixGlo1:ixGhi1,&
    ixGlo2:ixGhi2)
 double precision:: res,sigma,lxsize,sigma3
-integer :: ix1,ix2,na,idims,imode
+double precision:: sigma_j,jet_w,jet_h,jet_cx,jet_cy, r_jet(ixGlo1:ixGhi1,&
+   ixGlo2:ixGhi2)
+integer :: ix1,ix2,na,idims,imode, ixO1,ixO2
 logical, save:: first=.true.
 logical :: patchw(ixGmin1:ixGmax1,ixGmin2:ixGmax2)
 !----------------------------------------------------------------------------
@@ -396,6 +398,28 @@ where(x(ixmin1:ixmax1,ixmin2:ixmax2,2)<htra1)
 endwhere
 
 
+!This part I added, hopefully it works:
+!!This is where we add the jet
+!For FWHM
+sigma_j = 0.2d0
+jet_w = 1.0d-2!!NOTE:(xprobmax1-xprobmax2)/nxlone1
+jet_h = 0.05d0
+jet_cx = (jet_w-jet_w)/2.0d0 !center pts x
+jet_cy = (jet_h-0.0d0)/2.0d0 !center pts y
+r_jet(ixmin1:ixmax1,ixmin2:ixmax2) = (x(ixmin1:ixmax1,ixmin2:ixmax2,1)&
+   -jet_cx)**2+(x(ixmin1:ixmax1,ixmin2:ixmax2,2)-jet_cy)**2
+
+!do ixO2=ixmin2,ixmax2
+!do ixO1=ixmin1,ixmax1
+!   if (x(ixO^D,2).le. jet_h .and. x(ixO^D,1).le.jet_w/2.0d0 .and. x(ixO^D,1).ge.-jet_w/2.0d0) then
+!      !w(ix^D,rho_) = ra(1)
+!      !w(ixO^D,p_) = pa(1)!10.0d0*pa(1)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
+!      w(ixO^D,v2_)  = (1.0d6/vunit)*dexp(-r_jet(ixO1,ixO2)/(sigma_j*sigma_j))
+!      w(ixO^D,tr1_) = 100.0d0
+!   endif
+!end do
+!end do
+
 
 w(ixGmin1:ixGmax1,ixGmin2:ixGmax2,psi_)=0.d0
 
@@ -477,29 +501,26 @@ case(3)
      w(ixOmin1:ixOmax1,ix2,rho_)=rbc(ix2)
      w(ixOmin1:ixOmax1,ix2,p_)=pbc(ix2)
    enddo
-   !This part I added, hopefully it works:
-   !!This is where we add the jet
-   !For FWHM
-   sigma = 0.2d0
-   jet_w = 1.0d-2!!NOTE:(xprobmax1-xprobmax2)/nxlone1
-   jet_h = 0.05d0
-   jet_cx = (jet_w-jet_w)/2.0d0 !center pts x
-   jet_cy = (jet_h-0.0d0)/2.0d0 !center pts y
-   r_jet(ixOmin1:ixOmax1,ixOmin2:ixOmax2) = (x(ixOmin1:ixOmax1,&
-      ixOmin2:ixOmax2,1)-jet_cx)**2+(x(ixOmin1:ixOmax1,ixOmin2:ixOmax2,2)&
-      -jet_cy)**2
+!   !This part I added, hopefully it works:
+!   !!This is where we add the jet
+!   !For FWHM
+!   sigma = 0.2d0
+!   jet_w = 1.0d-2!!NOTE:(xprobmax1-xprobmax2)/nxlone1
+!   jet_h = 0.05d0
+!   jet_cx = (jet_w-jet_w)/2.0d0 !center pts x
+!   jet_cy = (jet_h-0.0d0)/2.0d0 !center pts y
+ !r_jet(ixOmin1:ixOmax1,ixOmin2:ixOmax2) = (x(ixOmin1:ixOmax1,ixOmin2:ixOmax2,1)-jet_cx)**2+(x(ixOmin1:ixOmax1,ixOmin2:ixOmax2,2)-jet_cy)**2
 
-   do ix2=ixOmin2,ixOmax2
-   do ix1=ixOmin1,ixOmax1
-      if (x(ix1,ix2,2).le. jet_h .and. x(ix1,ix2,1).le.jet_w&
-         /2.0d0 .and. x(ix1,ix2,1).ge.-jet_w/2.0d0) then
-         !w(ix1,ix2,rho_) = ra(1)
- !w(ixO1,ixO2,p_) = pa(1)!10.0d0*pa(1)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
-         w(ix1,ix2,v2_)  = (8.0d6/vunit)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
-         w(ix1,ix2,tr1_) = 100.0d0
-      endif
-   end do
-   end do
+!   do ix2=ixOmin2,ixOmax2
+!   do ix1=ixOmin1,ixOmax1
+ !if (x(ix1,ix2,2).le. jet_h .and. x(ix1,ix2,1).le.jet_w/2.0d0 .and. x(ix1,ix2,1).ge.-jet_w/2.0d0) then
+!         !w(ix1,ix2,rho_) = ra(1)
+ !!w(ixO1,ixO2,p_) = pa(1)!10.0d0*pa(1)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
+!         w(ix1,ix2,v2_)  = (8.0d6/vunit)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
+!         w(ix1,ix2,tr1_) = 100.0d0
+!      endif
+!   end do
+!   end do
 
   
    

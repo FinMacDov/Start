@@ -36,7 +36,7 @@
         typegradlimiter1 = 13*'koren'
         typelimited='predictor'
         useprimitive=.true.
-        
+
         dimsplit=.false.
         fixsmall=.true.
         strictsmall=.false.
@@ -56,7 +56,7 @@
 !        typeB=9*'cont',9*'cont',9*'special', 9*'cont'
         typeB=	9*'noinflow',
 	      	9*'noinflow',
-		'symm','symm','asymm','symm','symm','symm','symm','symm','symm' 
+		'symm','symm','asymm','symm','symm','symm','symm','symm','symm'
 		9*'cont'
  /
 

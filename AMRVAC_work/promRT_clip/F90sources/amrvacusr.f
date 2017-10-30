@@ -154,7 +154,7 @@ pwidth=0.5d0 !! width in Lunit
 
    eqpar(nxmodes_)=50 !! number of random modes for the velocity pertabtions.
    eqpar(BB1_)=zero!0.1d0 !!
-   eqpar(BB2_)=10.d0/Bunit !!
+   eqpar(BB2_)=100.d0/Bunit !!!10.d0/Bunit !!
    eqpar(BB3_)=zero!4.d0 !!
    eqpar(eps_)=0.05d0 !!
 
@@ -444,7 +444,7 @@ double precision, intent(inout) :: w(ixGmin1:ixGmax1,ixGmin2:ixGmax2,1:nw)
 
 double precision :: dx1,dx2,delydelx,gjjm1,delydelz
 double precision :: Teb(ixGlo1:ixGhi1,ixGlo2:ixGhi2),pth(ixGlo1:ixGhi1,&
-   ixGlo2:ixGhi2),cg
+   ixGlo2:ixGhi2),cg, peroid, v_max, qt_max
 double precision:: sigma, mid_pt, r_jet(ixGlo1:ixGhi1,ixGlo2:ixGhi2), jet_w,&
     jet_h, jet_cx, jet_cy !added
 logical :: patchw(ixGlo1:ixGhi1,ixGlo2:ixGhi2)
@@ -453,6 +453,7 @@ integer :: ix1,ix2,idims,ixIntmin1,ixIntmin2,ixIntmax1,ixIntmax2
 oktest = index(teststr,'specialbound')>=1
 if (oktest) write(unitterm,*) ' === specialbound  (in ) : ', 'ixO^L : ',&
    ixOmin1,ixOmin2,ixOmax1,ixOmax2
+
 
 select case(iB)
 case(3)
@@ -501,26 +502,50 @@ case(3)
      w(ixOmin1:ixOmax1,ix2,rho_)=rbc(ix2)
      w(ixOmin1:ixOmax1,ix2,p_)=pbc(ix2)
    enddo
-!   !This part I added, hopefully it works:
-!   !!This is where we add the jet
-!   !For FWHM
-!   sigma = 0.2d0
-!   jet_w = 1.0d-2!!NOTE:(xprobmax1-xprobmax2)/nxlone1
-!   jet_h = 0.05d0
-!   jet_cx = (jet_w-jet_w)/2.0d0 !center pts x
-!   jet_cy = (jet_h-0.0d0)/2.0d0 !center pts y
- !r_jet(ixOmin1:ixOmax1,ixOmin2:ixOmax2) = (x(ixOmin1:ixOmax1,ixOmin2:ixOmax2,1)-jet_cx)**2+(x(ixOmin1:ixOmax1,ixOmin2:ixOmax2,2)-jet_cy)**2
+   !This part I added, hopefully it works:
+   !!This is where we add the jet
+   !For FWHM
+   sigma = 0.2d0
+   jet_w = 1.0d-2!!NOTE:(xprobmax1-xprobmax2)/nxlone1
+   jet_h = 0.05d0
+   jet_cx = (jet_w-jet_w)/2.0d0 !center pts x
+   jet_cy = (jet_h-0.0d0)/2.0d0 !center pts y
+   r_jet(ixOmin1:ixOmax1,ixOmin2:ixOmax2) = (x(ixOmin1:ixOmax1,&
+      ixOmin2:ixOmax2,1)-jet_cx)**2+(x(ixOmin1:ixOmax1,ixOmin2:ixOmax2,2)&
+      -jet_cy)**2
+   peroid = 10.0d0/tunit
 
-!   do ix2=ixOmin2,ixOmax2
-!   do ix1=ixOmin1,ixOmax1
- !if (x(ix1,ix2,2).le. jet_h .and. x(ix1,ix2,1).le.jet_w/2.0d0 .and. x(ix1,ix2,1).ge.-jet_w/2.0d0) then
-!         !w(ix1,ix2,rho_) = ra(1)
- !!w(ixO1,ixO2,p_) = pa(1)!10.0d0*pa(1)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
-!         w(ix1,ix2,v2_)  = (8.0d6/vunit)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
-!         w(ix1,ix2,tr1_) = 100.0d0
-!      endif
-!   end do
-!   end do
+
+   v_max = 0
+   do ix2=ixOmin2,ixOmax2
+   do ix1=ixOmin1,ixOmax1
+      if (x(ix1,ix2,2).le. jet_h .and. x(ix1,ix2,1).le.jet_w&
+         /2.0d0 .and. x(ix1,ix2,1).ge.-jet_w/2.0d0) then
+         w(ix1,ix2,rho_) = ra(1)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
+ !it seems in this module it is using conservative varables there for i need to convert to primative in some way to add velocity.
+ !Alt I can calulate the momentum that I need and use that value as I know rho and I set v2.
+!For pressure I need to use pth
+         w(ix1,ix2,p_) = pa(1)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))
+ !w(ix1,ix2,v2_)  = (1.0d3/vunit)*dexp(-r_jet(ix1,ix2)/(sigma*sigma))*tanh(2.0d0*dpi*qt/peroid)*ra(1)
+         w(ix1,ix2,v2_)  = (8.0d6/vunit)*dexp(-r_jet(ix1,ix2)&
+            /(sigma*sigma))*tanh(qt/100.0d0)
+         w(ix1,ix2,tr1_) = 100.0d0
+      endif
+      if (w(ix1,ix2,v2_)).gt.(v_max) then
+        v_max = w(ix1,ix2,v2_)
+        qt_max = qt
+      endif
+   end do
+   end do
+
+
+   if (mype==7) then
+    print *, v_max, qt_max
+  endif
+
+!   if (mype==0) then
+!    print *, 'time',qt*tunit
+!  endif
 
   
    

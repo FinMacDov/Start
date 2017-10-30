@@ -280,7 +280,7 @@ UNIT_VELOCITY=vunit
 tunit=Lunit/vunit ! s
 heatunit=punit/tunit ! mb1.kg.sb3 = pa.s-1
 Ti = tunit! s
-
+print *,
 ! units for convert
 if(iprob==-1) then
   normvar(0) = one
@@ -392,13 +392,14 @@ include 'amrvacdef.f'
 
 integer, intent(in) :: ixGmin1,ixGmin2,ixGmax1,ixGmax2, ixmin1,ixmin2,ixmax1,&
    ixmax2
-integer :: ix1,ix2,na,imode, jx
+integer :: ix1,ix2,na,imode,jx,idims
 double precision:: res, lxsize, sigma, phase, mid_pt, eps, dy
 double precision, intent(in) :: x(ixGmin1:ixGmax1,ixGmin2:ixGmax2,1:ndim)
 double precision, intent(inout) :: w(ixGmin1:ixGmax1,ixGmin2:ixGmax2,1:nw)
 double precision:: rinlet(ixGlo1:ixGhi1,ixGlo2:ixGhi2), r_jet(ixGlo1:ixGhi1,&
    ixGlo2:ixGhi2), p_bg(ixGlo1:ixGhi1,ixGlo2:ixGhi2)
-double precision:: psi(ixGlo1:ixGhi1,ixGlo2:ixGhi2)
+double precision:: psi(ixGlo1:ixGhi1,ixGlo2:ixGhi2),tmp(ixGlo1:ixGhi1,&
+   ixGlo2:ixGhi2)
 double precision :: jet_w, jet_h, jet_cx, jet_cy
 
 logical, save:: first=.true., first_1=.true.
@@ -454,6 +455,9 @@ patchw(ixGmin1:ixGmax1,ixGmin2:ixGmax2)=.false.
 call conserve(ixGmin1,ixGmin2,ixGmax1,ixGmax2,ixmin1,ixmin2,ixmax1,ixmax2,w,x,&
    patchw)
 w(ixmin1:ixmax1,ixmax2+1,e_)=iniene
+w(ixmin1:ixmax1,ixmax2+1,m1_)=zero
+w(ixmin1:ixmax1,ixmax2+1,m2_)=zero
+w(ixmin1:ixmax1,ixmax2+1,m3_)=zero
 !print *, w(ix^S,e_)
 call primitive(ixGmin1,ixGmin2,ixGmax1,ixGmax2,ixmin1,ixmin2,ixmax1,ixmax2,w,&
    x)
@@ -473,13 +477,30 @@ enddo
 !end do
 !end do
 
+
+! compute dp/dy
+idims=2 !
+select case(typegrad)
+    case("central")
+     call gradient(w(ixmin1:ixmax1,ixmin2:ixmax2,p_),ixGmin1,ixGmin2,ixGmax1,&
+        ixGmax2,ixmin1,ixmin2,ixmax1,ixmax2,idims,tmp)
+    case("limited")
+     call gradientS(w(ixmin1:ixmax1,ixmin2:ixmax2,p_),ixGmin1,ixGmin2,ixGmax1,&
+        ixGmax2,ixmin1,ixmin2,ixmax1,ixmax2,idims,tmp)
+end select
+
 do ix1=ixmin1,ixmax1
 do ix2=ixmin2+2,ixmax2-2
-   w(ix1,ix2,rho_) = (1/eqpar(grav2_))*(1.d0/(12.d0*(x(ix1,ix2&
-      +1,2)-x(ix1,ix2,2))))*(w(ix1,ix2+2,p_) -8.D0*w(ix1,ix2+1,p_)&
-      +8.D0*w(ix1,ix2-1,p_)-w(ix1,ix2-2,p_))
+   w(ix1,ix2,rho_) = -(1/eqpar(grav2_))*tmp(ix1,ix2)
 end do
 end do
+
+!do ix1=ixmin1,ixmax1
+!do ix2=ixmin2+2,ixmax2-2
+!   w(ix^D,rho_) = -(1/eqpar(grav2_))*(1.d0/(12.d0*(x(ix1,ix2+1,2)-x(ix1,ix2,2))))*(w(ix1,ix2+2,p_) &
+!                   -8.D0*w(ix1,ix2+1,p_)+8.D0*w(ix1,ix2-1,p_)-w(ix1,ix2-2,p_))
+!end do
+!end do
 
 
 

@@ -37,7 +37,7 @@ UNIT_VELOCITY=vunit
 tunit=Lunit/vunit ! s
 heatunit=punit/tunit ! m−1.kg.s−3 = pa.s-1
 Ti = tunit! s
-print *, 
+print *,
 ! units for convert
 if(iprob==-1) then
   normvar(0) = one
@@ -139,12 +139,12 @@ subroutine initonegrid_usr(ixG^L,ix^L,w,x)
 include 'amrvacdef.f'
 
 integer, intent(in) :: ixG^L, ix^L
-integer :: ix^D,na,imode, jx
+integer :: ix^D,na,imode,jx,idims
 double precision:: res, lxsize, sigma, phase, mid_pt, eps, dy
 double precision, intent(in) :: x(ixG^S,1:ndim)
 double precision, intent(inout) :: w(ixG^S,1:nw)
 double precision:: rinlet(ixG^T), r_jet(ixG^T), p_bg(ixG^T)
-double precision:: psi(ixG^T)
+double precision:: psi(ixG^T),tmp(ixG^T)
 double precision :: jet_w, jet_h, jet_cx, jet_cy
 
 logical, save:: first=.true., first_1=.true.
@@ -199,7 +199,9 @@ end do
 patchw(ixG^S)=.false.
 call conserve(ixG^L,ix^L,w,x,patchw)
 w(ixmin1:ixmax1,ixmax2+1,e_)=iniene
-w(ixmin1:ixmax1,ixmax2,m1_)=
+w(ixmin1:ixmax1,ixmax2+1,m1_)=zero
+w(ixmin1:ixmax1,ixmax2+1,m2_)=zero
+w(ixmin1:ixmax1,ixmax2+1,m3_)=zero
 !print *, w(ix^S,e_)
 call primitive(ixG^L,ix^L,w,x)
 !print *, w(ix^S,p_)
@@ -218,12 +220,28 @@ enddo
 !end do
 !end do
 
+
+! compute dp/dy
+idims=2 !
+select case(typegrad)
+    case("central")
+     call gradient(w(ixmin1:ixmax1,ixmin2:ixmax2,p_),ixG^L,ix^L,idims,tmp)
+    case("limited")
+     call gradientS(w(ixmin1:ixmax1,ixmin2:ixmax2,p_),ixG^L,ix^L,idims,tmp)
+end select
+
 do ix1=ixmin1,ixmax1
 do ix2=ixmin2+2,ixmax2-2
-   w(ix^D,rho_) = -(1/eqpar(grav2_))*(1.d0/(12.d0*(x(ix1,ix2+1,2)-x(ix1,ix2,2))))*(w(ix1,ix2+2,p_) &
-                   -8.D0*w(ix1,ix2+1,p_)+8.D0*w(ix1,ix2-1,p_)-w(ix1,ix2-2,p_))
+   w(ix^D,rho_) = -(1/eqpar(grav2_))*tmp(ix1,ix2)
 end do
 end do
+
+!do ix1=ixmin1,ixmax1
+!do ix2=ixmin2+2,ixmax2-2
+!   w(ix^D,rho_) = -(1/eqpar(grav2_))*(1.d0/(12.d0*(x(ix1,ix2+1,2)-x(ix1,ix2,2))))*(w(ix1,ix2+2,p_) &
+!                   -8.D0*w(ix1,ix2+1,p_)+8.D0*w(ix1,ix2-1,p_)-w(ix1,ix2-2,p_))
+!end do
+!end do
 
 
 

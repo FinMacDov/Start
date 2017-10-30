@@ -113,16 +113,28 @@ University of Sheffield \\ % Your institution for the title page
 %------------------------------------------------
 \subsection{Cornal Heating}
 \begin{frame}
-Test
+\begin{block}{Coronal Heating}
+\begin{itemize}
+\item Sumerise the problem. 
+\end{itemize}
+\end{block}
 \end{frame}
 
 \subsection{Transition Region Quakes} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
 \begin{frame}
-
+\begin{block}{TRQ}
+\begin{itemize}
+\item Explain the what it is
+\item Include images from scullions thesis
+\end{itemize}
+\end{block}
 \end{frame}
 \subsection{Scientific Goal}
-\begin{frame}
-
+\begin{frame}{Scientific Goal}
+\begin{itemize}
+\item Clearly state the problem you are investigating
+\item Why should they care or what the use in it?
+\end{itemize}
 \end{frame}
 \section{MPI-AMRVAC}
 \subsection{Overview}
@@ -141,7 +153,7 @@ Test
 \begin{block}{AMR}
 \begin{itemize}
 \item diagrams to explain
-\item example by movie
+\item example with single movie with moving mesh.   
 \end{itemize}
 \end{block}
 \end{frame}
@@ -154,12 +166,59 @@ Outline AMR criteria.
 \subsection{MHD Module}
 \begin{frame}
 \begin{block}{MHD Module}
-Have equations.
+\begin{equation}
+\partial_t \rho + \nabla \cdot ( \mathbf{v} \rho ) = 0
+\end{equation}
+\begin{equation}
+\partial_t (\rho \mathbf{v})+ \nabla \cdot (\mathbf{v} \rho \mathbf{v} - \mathbf{BB}) + \nabla p_{tot} = 0 ,
+\end{equation}
+\begin{equation}
+\partial_t e + \nabla \cdot (\mathbf{v} e - \mathbf{BB} \cdot \mathbf{v}+\mathbf{v} p_{tot}) = \nabla \cdot (\mathbf{B} \times \eta \mathbf{J} ) ,
+\end{equation}
+\begin{equation}
+\partial_t \mathbf{B} + \nabla \cdot (\mathbf{vB}-\mathbf{Bv}) = - \nabla \times (\eta \mathbf{J}) .
+\end{equation}
+Where:
+\begin{equation}
+p = (\gamma -1) \left( e -  \frac{\rho \mathbf{v}^2}{2} - \frac{\mathbf{B}^2}{2} \right) ,
+\end{equation}
+\begin{equation}
+p_{tot} = p + \frac{\mathbf{B}^2}{2},
+\end{equation}
+\begin{equation}
+\mathbf{J} = \nabla \times \mathbf{B}.
+\end{equation}
+\begin{itemize}
+\item Explain why the equations are in this conservative form. 
+\item Explain the addition of source terms (ie gravity). 
+\end{itemize}
 \end{block}
 \end{frame}
-
 %------------------------------------------------
+\section{Jet Simultions}
+\subsection{Set up}
+\begin{frame}
+\begin{block}{Set up}
+\begin{itemize}
+\item Show line plots of profiles used. Compare against VALC data (see Ronnie PhD student thesis plots).
+\item Explain the BC conditons you are using.
+\item Video of the background being stable. 
+\item Explain the driver of the jet.
+\end{itemize}
+\end{block}
+\end{frame}
+\section{Conclusion and Future Plans}
+\begin{frame}
+\begin{block}{Conclusion}
 
+\end{block}
+\end{frame}
+%----------------------------------
+\begin{frame}
+\begin{block}{Future Plans}
+
+\end{block}
+\end{frame}
 
 %----------------------------------------------------------------------------------------
 

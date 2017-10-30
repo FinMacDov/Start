@@ -12,23 +12,28 @@
 ! filenamelog='./B_eq_y/jet/background_test/prom_2d_b_eq_y_background_test_'
 ! filenameout='./B_eq_y/jet/background_test/prom_2d_b_eq_y_background_test_.log'
  &filelist
-        filenamelog='./B_eq_y/jet/background_test/prom_2d_b_eq_y_background_test_'
-        filenameout='./B_eq_y/jet/background_test/prom_2d_b_eq_y_background_test_.log'
+!        filenamelog='./driver/tanh_qt_log_P_one_grid'
+!        filenameout='./driver/tanh_qt_P_one_grid'
+!one grid sav loc
+!        filenamelog='./background_one_grid/tanh_driver_log_'
+!        filenameout='./background_one_grid/tanh_driver_'
+        filenamelog='./test/tanh_driver_100G_log_'
+        filenameout='./test/tanh_driver_100G_'
         primnames= 'rho v1 v2 v3 p b1 b2 b3 psi tr'
         typefilelog='special'
         autoconvert=.true.
         saveprim=.T.
-        convert_type='vtuBmpi'
+        convert_type='vtuBmpi'!'vtuBCCmpi'!'vtuBmpi'
         nwauxio=2
-        typeparIO=-1
-
+!        level_io=3 !collaspse to level 3 grid.
+!        typeparIO=-1
  /
 
  &savelist
         itsave(1,1)=0
         itsave(1,2)=0
-        dtsave(1)     = 0.01
-        dtsave(2)     = 1.00
+        dtsave(1)     = 1.0d0!0.01
+        dtsave(2)     = 1.0d0!0.1
  /
 
  &stoplist
@@ -40,10 +45,10 @@
         wnames=       'rho m1 m2 m3 e b1 b2 b3 psi tr'
         fileheadout=  'promRT_mhd23'
         typeadvance=  'threestep'
-        typefull1=    13*'hll'
-        typepred1=    13*'hll'
-        typelimiter1= 13*'koren'
-        typelimited='predictor'
+        typefull1=    13*'hll'!'tvdlf'!
+        typepred1=    13*'hll'!'tvdlf'
+        typelimiter1= 13*'koren'!'vanleer'!
+        typelimited='predictor'!'previous'!
         dimsplit=.false.
         ssplitdivb=.true.
         typedivbfix='glm2'

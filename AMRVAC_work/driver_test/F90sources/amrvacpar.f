@@ -66,6 +66,6 @@ DOUBLE PRECISION:: xprobmin1,xprobmin2,xprobmax1,xprobmax2
 
 ! end include file amrvacpar.t.mhd
 !===============================================================================
-COMMON /INTE/ flags,iprob
 COMMON /DOUB/ smalle,minrho,minp,wflags,xprobmin1,xprobmin2,xprobmax1,&
    xprobmax2
+COMMON /INTE/ flags,iprob

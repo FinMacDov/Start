@@ -109,17 +109,31 @@ University of Sheffield \\ % Your institution for the title page
 %----------------------------------------------------------------------------------------
 
 %------------------------------------------------
-\section{Intoduction} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+\section{Introduction} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
 %------------------------------------------------
-\subsection{Cornal Heating}
+\subsection{Coronal Heating} % This slide maybe a bit too basic for audience.
 \begin{frame}
 \begin{block}{Coronal Heating}
 \begin{itemize}
-\item Sumerise the problem. 
+\item From the core of the sun to the photosphere the temperature decreases.
+\item Corona is 200 times hotter than the Sun's photosphere.
+\item This contradiction is referred to as the coronal heating problem. 
+\item One of the main candidates for heating the solar corona is through wave heating.
 \end{itemize}
 \end{block}
+\begin{figure}
+\centering
+\includegraphics[width = 0.825\textwidth]{images/loop.png}
+\end{figure}
 \end{frame}
-
+%----------------------------------------
+\subsection{Solar Jets}
+\begin{frame}{Solar Jets}
+\begin{itemize}
+\item give overview.
+\end{itemize}
+\end{frame}
+%-------------------------------------------
 \subsection{Transition Region Quakes} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
 \begin{frame}
 \begin{block}{TRQ}
@@ -141,9 +155,11 @@ University of Sheffield \\ % Your institution for the title page
 \begin{frame}
 \begin{block}{History}
 \begin{itemize}
-\item Talk a bit of VAC.
-\item Purpose of the code
-\item Strucutre of the code
+\item VAC was developed as a flexible software focused on implementing shock capturing numerical schemes (e.g. FCT, TVD, ect). 
+%\item MPI (Message Passing Interface)-AMR (Adaptive Mesh Refinement) VAC (Versatile Advection Code). 
+\item Aimed at solving, primarily hyperbolic partial differential equations.  
+\item MPI-AMRVAC is a parallel open source code (On Github: https://github.com/amrvac/amrvac).   
+\item Written in Fortran using a pre-processor which allows to program in any dimensional matter ( LASY-syntax).  
 \end{itemize}
 \end{block}
 \end{frame}
@@ -152,12 +168,49 @@ University of Sheffield \\ % Your institution for the title page
 \begin{frame}
 \begin{block}{AMR}
 \begin{itemize}
-\item diagrams to explain
-\item example with single movie with moving mesh.   
+\item Block based refinement strategy used. 
+\end{itemize}
+\end{block}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{images/AMR_grid.png}
+\caption{Describe}
+\end{figure}
+\end{frame}
+%-------------------------------------------------------
+\begin{frame}
+\begin{block}{Examples of Results of Using AMR}
+\begin{itemize}
+\item \href{movies/AMR_example_2.avi}{Example of AMR with 4 levels.}
+\item \href{movies/tracer_jet_g.avi}{Example of HD supersonic jet with gravity acting agiant the direction of flow.}
+\item \href{movies/mov_one.avi}{Example of Rayleigh Taylor simulation.}
 \end{itemize}
 \end{block}
 \end{frame}
-%-------------------------------------------------------
+%---------------------------------
+\begin{frame}
+\begin{block}{Why use AMR}
+Uniform Mesh:
+\begin{itemize}
+\item High resolution required for handling difficult regions (discontinuities, steep gradients, shocks, ect).
+\end{itemize}
+Adaptive Mesh Refinement:
+\begin{itemize}
+\item Start with a course grid.
+\item Identify regions that need finer resolution.
+\item Superimpose finer sub-grids only those regions.
+\item Increased computational saving over a static grid approach. 
+%\item Increased storage savings over static grid approach. 
+%????? Ask Robertus about length scales involved????
+\item  Track features much smaller than overall scale of the problem providing adequate higher spatial and temporal resolution where needed.    
+\end{itemize}
+\end{block}
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{images/MHD_jet.png}
+\end{figure}
+\end{frame}
+%-------------------------------
 \begin{frame}
 \begin{block}{Local Error Estimation}
 Outline AMR criteria.
@@ -183,28 +236,31 @@ Where:
 p = (\gamma -1) \left( e -  \frac{\rho \mathbf{v}^2}{2} - \frac{\mathbf{B}^2}{2} \right) ,
 \end{equation}
 \begin{equation}
-p_{tot} = p + \frac{\mathbf{B}^2}{2},
-\end{equation}
-\begin{equation}
-\mathbf{J} = \nabla \times \mathbf{B}.
+p_{tot} = p + \frac{\mathbf{B}^2}{2}, \ \ \ \mathbf{J} = \nabla \times \mathbf{B}. 
 \end{equation}
 \begin{itemize}
 \item Explain why the equations are in this conservative form. 
-\item Explain the addition of source terms (ie gravity). 
+\item Explain the addition of source terms (i.e. gravity). 
 \end{itemize}
 \end{block}
 \end{frame}
 %------------------------------------------------
-\section{Jet Simultions}
+\section{Jet Simulations}
 \subsection{Set up}
 \begin{frame}
 \begin{block}{Set up}
 \begin{itemize}
 \item Show line plots of profiles used. Compare against VALC data (see Ronnie PhD student thesis plots).
-\item Explain the BC conditons you are using.
+\item Explain the BC conditions you are using.
 \item Video of the background being stable. 
 \item Explain the driver of the jet.
 \end{itemize}
+\end{block}
+\end{frame}
+\subsection{Results}
+\begin{frame}
+\begin{block}{Results}
+MOVIES
 \end{block}
 \end{frame}
 \section{Conclusion and Future Plans}
